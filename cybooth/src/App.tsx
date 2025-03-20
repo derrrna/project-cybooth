@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import './App.css'
-import Photobooth from './Pages/Photobooth.jsx';
+import Photobooth from './pages/Photobooth.tsx';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>

@@ -14,15 +14,28 @@ export default function Photobooth() {
             {/* blob layer background 2 - visible for mobile, ipads, laptop*/}
             <div className="w-screen h-screen absolute z-[-39] overflow-hidden flex">
                 <div className="w-1/2 h-full relative">
-                    <img src="/blob1.png" className="scale-150 md:w-[40vw] lg:w-[35vw] translate-y-1/4 -translate-x-1/5 absolute bottom-0 left-0"/>
+                    <img src="/blob1.png" className="scale-150 md:w-[40vw] lg:w-[35vw] xl:w-[30vw] translate-y-1/4 -translate-x-1/5 absolute bottom-0 left-0"/>
                 </div>
                 <div className="w-1/2 h-full relative">
-                    <img src="/blob1.png" className="sm:w-[30vw] sm:translate-x-1/5 scale-150 md:w-[40vw] lg:w-[30vw] rotate-180 absolute top-0 right-0"/>
+                    <img src="/blob1.png" className="sm:w-[30vw] sm:translate-x-1/5 scale-150 md:w-[40vw] lg:w-[30vw] xl:w-[25vw] rotate-180 absolute top-0 right-0"/>
                 </div>
             </div>
 
             {/* flower layer background*/}
-            <div className="absolute z-[-30] w-screen h-screen">
+            <div className="absolute z-[-30] w-screen h-screen flex overflow-hidden opacity-30">
+                <div className="h-full w-1/2">
+                    <div className="h-1/2 w-full bg-amber-600">
+                    </div>
+                    <div className="h-1/2 w-full bg-fuchsia-100">
+                    </div>
+                </div>
+
+                <div className="h-full w-1/2">
+                    <div className="h-1/2 w-full bg-fuchsia-300">
+                    </div>
+                    <div className="h-1/2 w-full bg-fuchsia-400">
+                    </div>
+                </div>
 
             </div>
 

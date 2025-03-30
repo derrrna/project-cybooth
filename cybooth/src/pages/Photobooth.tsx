@@ -1,3 +1,4 @@
+import DynamicImage from "../components/DynamicImage.tsx";
 
 
 export default function Photobooth() {
@@ -26,6 +27,15 @@ export default function Photobooth() {
                 </div>
             </div>
 
+            {/*Flower layer */}
+            <div className={"w-screen h-screen relative"}>
+                <div className={"w-full h-full absolute"}>
+
+                </div>
+
+            </div>
+
+            <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-180'} scaleUp={'scale-40'} originalScale={'scale-20'}/>
 
 
             {/* content layer*/}

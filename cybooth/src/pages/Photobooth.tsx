@@ -3,9 +3,9 @@ import DynamicImage from "../components/DynamicImage.tsx";
 
 export default function Photobooth() {
     return (
-        <>
+        <div className={'overflow-hidden w-screen h-screen'}>
             {/* grid background*/}
-            <div className="absolute w-screen h-screen bg-[size:25px_25px] opacity-40 z-[-50]
+            <div className="absolute w-screen overflow-hidden h-screen bg-[size:25px_25px] opacity-40 z-[-50]
             bg-[linear-gradient(to_right,#FFAFCC_0.5px,transparent_1px),linear-gradient(to_bottom,#FFAFCC_0.5px,transparent_1px)]"/>
 
             {/* blob layer background 1 - visible only on laptop*/}
@@ -16,7 +16,7 @@ export default function Photobooth() {
             </div>
 
             {/* blob layer background 2 - visible for mobile, ipads, laptop*/}
-            <div className="w-screen h-screen absolute z-[-39] overflow-hidden flex">
+            <div className="w-full h-full absolute z-[-39] overflow-hidden flex">
                 <div className="w-1/2 h-full relative">
                     <img src="/blob1.png"
                          className="scale-180 lg:scale-70 translate-y-1/3 -translate-x-2/7 absolute bottom-0 left-0"/>
@@ -27,23 +27,25 @@ export default function Photobooth() {
                 </div>
             </div>
 
-            {/*Flower layer */}
-            <div className={"w-screen h-screen relative"}>
-                <div className={"w-full h-full absolute"}>
 
+            {/*Flower layer visible on mobile and laptop */}
+            <div className={"w-full h-full flex z-[-38]"}>
+                <div className={"w-1/2 h-full"}>
+                    <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-90 translate-y-2/5'} scaleUp={'scale-45'} originalScale={'scale-40'}/>
+                </div>
+                <div className={"w-1/2 h-full"}>
+                    <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-180 '} scaleUp={'scale-40'} originalScale={'scale-20'}/>
                 </div>
 
             </div>
 
-            <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-180'} scaleUp={'scale-40'} originalScale={'scale-20'}/>
-
 
             {/* content layer*/}
-            <div className="absolute w-screen h-screen flex z-[0]">
+            <div className="w-full h-full flex z-[0]">
             </div>
 
 
-        </>
+        </div>
     )
 }
 

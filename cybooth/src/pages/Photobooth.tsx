@@ -31,10 +31,12 @@ export default function Photobooth() {
             {/*Flower layer visible on mobile and laptop */}
             <div className={"w-full h-full flex z-[-38]"}>
                 <div className={"w-1/2 h-full"}>
-                    <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-90 translate-y-2/5'} scaleUp={'scale-45'} originalScale={'scale-40'}/>
+                    <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-90 translate-y-3/7 -translate-x-1/4 lg:-translate-x-0'}
+                                  scaleUp={'lg:scale-45 scale-90'} originalScale={'lg:scale-40 scale-80'}/>
                 </div>
                 <div className={"w-1/2 h-full"}>
-                    <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-180 '} scaleUp={'scale-40'} originalScale={'scale-20'}/>
+                    <DynamicImage imageSource={"Flower1.png"} imageStyle={'rotate-180 -translate-y-4/9 -translate-x-2/5 lg:-translate-y-2/5 lg:-translate-x-1/7'}
+                                  scaleUp={'lg:scale-45 scale-80'} originalScale={'lg:scale-40 scale-70'}/>
                 </div>
 
             </div>

@@ -2,7 +2,11 @@
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        press: ['Press Start 2P', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }

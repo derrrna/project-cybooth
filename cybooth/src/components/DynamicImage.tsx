@@ -14,6 +14,6 @@ export default function DynamicImage({imageSource, imageStyle, scaleUp, original
     return (
             <img src={imageSource} alt="image" onMouseOver={()=>setIsHovering(true)} onTouchStart={()=>setIsHovering(true)}
                  onMouseLeave={()=>setIsHovering(false)} onTouchEnd={()=>setIsHovering(false)}
-                 className={`h-full w-full object-contain transform transition-transform duration-500 ${imageStyle} ${isHovering ? `${scaleUp}` : `${originalScale}`}`}/>
+                 className={`h-full w-full transform transition-transform duration-500 ${imageStyle} ${isHovering ? `${scaleUp}` : `${originalScale}`}`}/>
         )
 }

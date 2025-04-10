@@ -1,7 +1,12 @@
 import DynamicImage from "../components/DynamicImage.tsx";
 import Webcam from 'react-webcam';
+import {useState} from "react";
+import PhotoPreview from "../components/PhotoPreview.tsx";
 
 export default function Photobooth() {
+
+    const [savedPhotos, setSavedPhotos] = useState(['/placeholder.jpg','/placeholder.jpg','/placeholder.jpg','/placeholder.jpg'])
+
     return (
         <div className={'overflow-hidden w-screen h-screen flex'}>
             {/* grid background*/}
@@ -30,35 +35,48 @@ export default function Photobooth() {
             {/* flower layer background 1 - visible for mobile, ipads, laptop */}
             <div className={"w-full h-full absolute flex overflow-hidden"}>
                 <DynamicImage imageSource={"Flower1.png"}
-                              imageStyle={'z-[11] rotate-90 translate-y-3/7 -translate-x-2/5 lg:-translate-x-1/6'}
+                              imageStyle={'z-[11] rotate-90 translate-y-3/7 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}
                               scaleUp={'lg:scale-45 scale-60'} originalScale={'lg:scale-40 scale-50'}/>
                 <DynamicImage imageSource={"Flower1.png"}
-                              imageStyle={'z-[11] rotate-180 -translate-y-4/9 -translate-x-6/7 lg:-translate-y-2/5 lg:-translate-x-4/9'}
-                              scaleUp={'lg:scale-45 scale-70'} originalScale={'lg:scale-40 scale-60'}/>
+                              imageStyle={'z-[11] -rotate-85 lg:rotate-180 -translate-y-4/10 -translate-x-5/8 lg:-translate-y-2/5 ' +
+                                  'lg:-translate-x-4/9 xl:-translate-x-2/9 object-contain'}
+                              scaleUp={'lg:scale-45 scale-50'} originalScale={'lg:scale-40 scale-40'}/>
             </div>
 
             {/* flower layer background 2 - visible only on laptop */}
             <div className={'hidden w-full h-full absolute lg:flex overflow-hidden'}>
                 <DynamicImage imageSource={"Flower2.png"} originalScale={'scale-30'} scaleUp={'scale-40'}
-                              imageStyle={'z-[11] -rotate-90 -translate-y-3/7 -translate-x-1/3'}/>
+                              imageStyle={'z-[11] -rotate-90 -translate-y-3/7 -translate-x-1/3 object-contain'}/>
                 <DynamicImage imageSource={"Flower2.png"} originalScale={'scale-30'} scaleUp={'scale-40'}
-                              imageStyle={'z-[11] rotate-45 translate-y-4/9 translate-x-1/9'}/>
+                              imageStyle={'z-[11] rotate-45 translate-y-4/9 translate-x-1/9 object-contain'}/>
             </div>
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
-                {/* webcam */}
+                <div className={'bg-[#FF4A8B] z-[10] w-2/5 lg:w-1/5 p-3 rounded-tr-4xl rounded-tl-4xl flex justify-center'}>
+                    {/*TODO font not working. Add buttons here for photo previe*/}
+                    <p className={'text-[#FFFFFF] font-press'}>cheese ♡</p>
+                </div>
+
+                {/* Webcam */}
                 <Webcam
                     className={'z-[10] rounded-xl object-cover h-4/5 w-3/4 lg:w-1/2 lg:h-3/4'}
                     audio={false}
                     screenshotFormat={"image/jpeg"}
                     imageSmoothing={true}
                 />
+
+                {/* Capture button */}
                 <button
                     className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[10] flex justify-center drop-shadow-[2px_2px_5px_rgba(0,0,0,0.3)] ' +
                         'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77]'}>
                     <img src={'camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
                 </button>
+            </div>
+
+            {/* Photo Preview component - visible on laptop only */}
+            <div className={'w-full h-full absolute hidden lg:flex overflow-hidden justify-end pr-[6vw]'}>
+                <PhotoPreview imageList={savedPhotos} />
             </div>
 
         </div>

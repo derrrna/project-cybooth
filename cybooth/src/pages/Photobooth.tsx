@@ -46,13 +46,19 @@ export default function Photobooth() {
             </div>
 
             {/* content layer */}
-            <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center'}>
+            <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
+                {/* webcam */}
                 <Webcam
-                    className={'z-[10] self-center rounded-xl object-cover h-4/5 w-3/4 lg:w-1/2 lg:h-3/4'}
+                    className={'z-[10] rounded-xl object-cover h-4/5 w-3/4 lg:w-1/2 lg:h-3/4'}
                     audio={false}
                     screenshotFormat={"image/jpeg"}
                     imageSmoothing={true}
                 />
+                <button
+                    className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[10] flex justify-center drop-shadow-[2px_2px_5px_rgba(0,0,0,0.3)] ' +
+                        'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77]'}>
+                    <img src={'camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
+                </button>
             </div>
 
         </div>

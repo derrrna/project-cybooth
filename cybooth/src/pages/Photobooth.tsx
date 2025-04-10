@@ -1,7 +1,8 @@
 import DynamicImage from "../components/DynamicImage.tsx";
+import Webcam from 'react-webcam';
 
 export default function Photobooth() {
-    return(
+    return (
         <div className={'overflow-hidden w-screen h-screen flex'}>
             {/* grid background*/}
             <div className="w-full absolute overflow-hidden h-full bg-[size:25px_25px] opacity-40 z-[1]
@@ -28,18 +29,30 @@ export default function Photobooth() {
 
             {/* flower layer background 1 - visible for mobile, ipads, laptop */}
             <div className={"w-full h-full absolute flex overflow-hidden"}>
-                <DynamicImage imageSource={"Flower1.png"} imageStyle={'z-[5] rotate-90 translate-y-3/7 -translate-x-1/4 lg:-translate-x-0'}
-                              scaleUp={'lg:scale-45 scale-90'} originalScale={'lg:scale-40 scale-80'}/>
-                <DynamicImage imageSource={"Flower1.png"} imageStyle={'z-[5] rotate-180 -translate-y-4/9 -translate-x-2/5 lg:-translate-y-2/5 lg:-translate-x-1/7'}
-                              scaleUp={'lg:scale-45 scale-80'} originalScale={'lg:scale-40 scale-70'}/>
+                <DynamicImage imageSource={"Flower1.png"}
+                              imageStyle={'z-[11] rotate-90 translate-y-3/7 -translate-x-2/5 lg:-translate-x-1/6'}
+                              scaleUp={'lg:scale-45 scale-60'} originalScale={'lg:scale-40 scale-50'}/>
+                <DynamicImage imageSource={"Flower1.png"}
+                              imageStyle={'z-[11] rotate-180 -translate-y-4/9 -translate-x-6/7 lg:-translate-y-2/5 lg:-translate-x-4/9'}
+                              scaleUp={'lg:scale-45 scale-70'} originalScale={'lg:scale-40 scale-60'}/>
             </div>
 
-            {/**/}
+            {/* flower layer background 2 - visible only on laptop */}
             <div className={'hidden w-full h-full absolute lg:flex overflow-hidden'}>
                 <DynamicImage imageSource={"Flower2.png"} originalScale={'scale-30'} scaleUp={'scale-40'}
-                              imageStyle={'z-[5] -rotate-90 -translate-y-3/7 -translate-x-1/3'} />
+                              imageStyle={'z-[11] -rotate-90 -translate-y-3/7 -translate-x-1/3'}/>
                 <DynamicImage imageSource={"Flower2.png"} originalScale={'scale-30'} scaleUp={'scale-40'}
-                              imageStyle={'z-[5] rotate-45 translate-y-4/9 translate-x-1/9'} />
+                              imageStyle={'z-[11] rotate-45 translate-y-4/9 translate-x-1/9'}/>
+            </div>
+
+            {/* content layer */}
+            <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center'}>
+                <Webcam
+                    className={'z-[10] self-center rounded-xl object-cover h-4/5 w-3/4 lg:w-1/2 lg:h-3/4'}
+                    audio={false}
+                    screenshotFormat={"image/jpeg"}
+                    imageSmoothing={true}
+                />
             </div>
 
         </div>

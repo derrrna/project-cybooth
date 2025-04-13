@@ -18,7 +18,7 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
             ))}
 
             {/* TODO implement button */}
-            <button className={'p-4'}>
+            <button className={'p-4 cursor-pointer'}>
                 download
             </button>
 

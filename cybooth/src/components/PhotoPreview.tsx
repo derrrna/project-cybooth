@@ -1,4 +1,5 @@
 import DynamicImage from "./DynamicImage.tsx";
+import {Link} from "react-router-dom";
 
 interface PhotoPreviewProps {
     imageList: Array<{id: string, image: string}>;
@@ -18,9 +19,9 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
             ))}
 
             {/* TODO implement button */}
-            <button className={'p-4 cursor-pointer'}>
-                download
-            </button>
+            <Link to="/editor" className={'p-4 cursor-pointer w-2 h-2 bg-fuchsia-100'}>
+                <img src={'/download-icon.svg'} alt={'download button'} className={'object-fill'}/>
+            </Link>
 
         </div>
     )

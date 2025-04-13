@@ -2,8 +2,11 @@ import DynamicImage from "../components/DynamicImage.tsx";
 import Webcam from 'react-webcam';
 import {useState, useId, useEffect} from "react";
 import PhotoPreview from "../components/PhotoPreview.tsx";
+import useCapture from "../hooks/useCapture.tsx";
 
 export default function Photobooth() {
+
+    const [totalNumPhotos, setTotalNumPhotos] = useState(0)
 
     const [savedPhotos, setSavedPhotos] = useState([
         {id: useId(), image: '/placeholder.jpg'},
@@ -11,8 +14,6 @@ export default function Photobooth() {
         {id: useId(), image: '/placeholder.jpg'},
         {id: useId(), image: '/placeholder.jpg'}
     ])
-
-    useEffect(() => {})
 
     return (
         <div className={'overflow-hidden w-screen h-screen flex'}>

@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('../src/assets/fonts/PressStart2P-Regular.ttf ');
+}
+
+@theme {
+    --font-pressstart2p: 'Press Start 2P';
+}
+

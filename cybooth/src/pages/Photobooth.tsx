@@ -1,19 +1,36 @@
 import DynamicImage from "../components/DynamicImage.tsx";
 import Webcam from 'react-webcam';
-import {useState, useId, useEffect} from "react";
+import {useState, useRef, useEffect} from "react";
 import PhotoPreview from "../components/PhotoPreview.tsx";
-import useCapture from "../hooks/useCapture.tsx";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Photobooth() {
 
     const [totalNumPhotos, setTotalNumPhotos] = useState(0)
+    const webcamRef = useRef(null);
+    const [showCountdown, setShowCountdown] = useState(false);
 
     const [savedPhotos, setSavedPhotos] = useState([
-        {id: useId(), image: '/placeholder.jpg'},
-        {id: useId(), image: '/placeholder.jpg'},
-        {id: useId(), image: '/placeholder.jpg'},
-        {id: useId(), image: '/placeholder.jpg'}
+        {id: uuidv4(), image: '/placeholder.jpg'},
+        {id: uuidv4(), image: '/placeholder.jpg'},
+        {id: uuidv4(), image: '/placeholder.jpg'},
+        {id: uuidv4(), image: '/placeholder.jpg'}
     ])
+
+    const handleCaptureClick = () => {
+        // Set countdown to be active.
+        setShowCountdown(true)
+
+        // Take a screenshot after countdown has activated.
+        
+        // Save the new photo into the photo array (will replace an image).
+        const tempPhotos = [...savedPhotos]
+        const newPhotoIndex = totalNumPhotos % 4
+        const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
+        tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
+        setTimeout(() => setSavedPhotos(tempPhotos), 5000)
+        setTotalNumPhotos(prevTotalNumPhotos => prevTotalNumPhotos + 1)
+    }
 
     return (
         <div className={'overflow-hidden w-screen h-screen flex'}>
@@ -61,24 +78,27 @@ export default function Photobooth() {
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
-                <div className={'bg-[#FF4A8B] z-[10] w-2/5 lg:w-1/5 p-3 rounded-tr-4xl rounded-tl-4xl flex justify-center'}>
+                <div className={'bg-[#FF4A8B] z-[10] w-3/5 lg:w-1/5 p-3 rounded-tr-4xl rounded-tl-4xl flex justify-center items-center'}>
                     {/*TODO font not working. Add buttons here for photo preview*/}
-                    <p className={'text-[#FFFFFF]'}>cheese ♡</p>
+                    <p className={'text-[#FFFFFF] text-xs lg:text-xl font-pressstart2p m-1'}>cheese</p>
+                    <p className={'text-[#FFFFFF] text-2xl'}>♡</p>
                 </div>
 
                 {/* Webcam */}
                 <Webcam
-                    className={'z-[10] rounded-xl object-cover h-4/5 w-3/4 lg:w-1/2 lg:h-3/4'}
+                    className={'z-[10] rounded-3xl object-cover h-4/5 w-3/4 lg:w-1/2 lg:h-3/4'}
                     audio={false}
                     screenshotFormat={"image/jpeg"}
                     screenshotQuality={1}
                     imageSmoothing={true}
+                    ref={webcamRef}
                 />
 
                 {/* Capture button */}
                 <button
                     className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[10] flex justify-center drop-shadow-[2px_2px_5px_rgba(0,0,0,0.3)] ' +
-                        'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77] cursor-pointer'}>
+                        'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77] cursor-pointer'}
+                    onClick = {handleCaptureClick}>
                     <img src={'camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
                 </button>
             </div>
@@ -86,6 +106,10 @@ export default function Photobooth() {
             {/* Photo Preview component - visible on laptop only */}
             <div className={'w-full h-full absolute hidden lg:flex overflow-hidden justify-end pr-[6vw]'}>
                 <PhotoPreview imageList={savedPhotos} />
+            </div>
+
+            <div className={`w-full h-full absolute flex justify-center items-center ${showCountdown ? '' : 'hidden'}`}>
+                <p className={'text-white font-pressstart2p text-6xl z-15'}>5</p>
             </div>
 
         </div>

@@ -1,11 +1,18 @@
 import DynamicImage from "../components/DynamicImage.tsx";
 import Webcam from 'react-webcam';
-import {useState} from "react";
+import {useState, useId, useEffect} from "react";
 import PhotoPreview from "../components/PhotoPreview.tsx";
 
 export default function Photobooth() {
 
-    const [savedPhotos, setSavedPhotos] = useState(['/placeholder.jpg','/placeholder.jpg','/placeholder.jpg','/placeholder.jpg'])
+    const [savedPhotos, setSavedPhotos] = useState([
+        {id: useId(), image: '/placeholder.jpg'},
+        {id: useId(), image: '/placeholder.jpg'},
+        {id: useId(), image: '/placeholder.jpg'},
+        {id: useId(), image: '/placeholder.jpg'}
+    ])
+
+    useEffect(() => {})
 
     return (
         <div className={'overflow-hidden w-screen h-screen flex'}>
@@ -48,14 +55,14 @@ export default function Photobooth() {
                 <DynamicImage imageSource={"Flower2.png"} originalScale={'scale-30'} scaleUp={'scale-40'}
                               imageStyle={'z-[11] -rotate-90 -translate-y-3/7 -translate-x-1/3 object-contain'}/>
                 <DynamicImage imageSource={"Flower2.png"} originalScale={'scale-30'} scaleUp={'scale-40'}
-                              imageStyle={'z-[11] rotate-45 translate-y-4/9 translate-x-1/9 object-contain'}/>
+                              imageStyle={'z-[13] rotate-45 translate-y-4/9 translate-x-1/9 object-contain'}/>
             </div>
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
                 <div className={'bg-[#FF4A8B] z-[10] w-2/5 lg:w-1/5 p-3 rounded-tr-4xl rounded-tl-4xl flex justify-center'}>
-                    {/*TODO font not working. Add buttons here for photo previe*/}
-                    <p className={'text-[#FFFFFF] font-press'}>cheese ♡</p>
+                    {/*TODO font not working. Add buttons here for photo preview*/}
+                    <p className={'text-[#FFFFFF]'}>cheese ♡</p>
                 </div>
 
                 {/* Webcam */}
@@ -63,13 +70,14 @@ export default function Photobooth() {
                     className={'z-[10] rounded-xl object-cover h-4/5 w-3/4 lg:w-1/2 lg:h-3/4'}
                     audio={false}
                     screenshotFormat={"image/jpeg"}
+                    screenshotQuality={1}
                     imageSmoothing={true}
                 />
 
                 {/* Capture button */}
                 <button
                     className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[10] flex justify-center drop-shadow-[2px_2px_5px_rgba(0,0,0,0.3)] ' +
-                        'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77]'}>
+                        'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77] cursor-pointer'}>
                     <img src={'camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
                 </button>
             </div>

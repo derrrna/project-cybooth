@@ -8,9 +8,7 @@ interface PhotoPreviewProps {
 
 export default function PhotoPreview({imageList}: PhotoPreviewProps) {
 
-    useEffect(() => {
-
-    }, [imageList]);
+    useEffect(() => {}, [imageList]);
 
     return (
         <div className={'bg-[#CDB4DB] z-[12] h-4/5 w-1/8 self-center p-2 rounded-2xl flex flex-col items-center'}>

@@ -9,6 +9,7 @@ export default function Photobooth() {
     const [totalNumPhotos, setTotalNumPhotos] = useState(0)
     const webcamRef = useRef(null);
     const [showCountdown, setShowCountdown] = useState(false);
+    const [currentCountdown, setCurrentCountdown] = useState(5);
 
     const [savedPhotos, setSavedPhotos] = useState([
         {id: uuidv4(), image: '/placeholder.jpg'},
@@ -18,19 +19,43 @@ export default function Photobooth() {
     ])
 
     const handleCaptureClick = () => {
-        // Set countdown to be active.
-        setShowCountdown(true)
 
-        // Take a screenshot after countdown has activated.
-        
-        // Save the new photo into the photo array (will replace an image).
-        const tempPhotos = [...savedPhotos]
-        const newPhotoIndex = totalNumPhotos % 4
-        const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
-        tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
-        setTimeout(() => setSavedPhotos(tempPhotos), 5000)
-        setTotalNumPhotos(prevTotalNumPhotos => prevTotalNumPhotos + 1)
+        // Set countdown to be active if it is already not.
+        if (!showCountdown) {
+            setShowCountdown(true)
+
+            setTimeout(()=> {
+                // Set the countdown to be inactive once the countdown is finished.
+                setShowCountdown(false)
+                setCurrentCountdown(5);
+
+                // Calculate the index of the new photo and create a copy of the current saved photos.
+                const tempPhotos = [...savedPhotos]
+                const newPhotoIndex = totalNumPhotos % 4
+
+                // Take the new photo and save it into the array with its correct index.
+                const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
+                tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
+                setSavedPhotos(tempPhotos)
+
+                // Update the total number of photos.
+                setTotalNumPhotos(prevTotalNumPhotos => prevTotalNumPhotos + 1)
+
+            }, 5000)
+        }
+
     }
+
+    useEffect(() => {
+
+        // If countdown is active and the current countdown value is more than 0,
+        if (showCountdown && currentCountdown > 0) {
+            // Continue to decrement the countdown display value.
+            const intervalId = setInterval(() => setCurrentCountdown(prevSecond => prevSecond - 1), 1000)
+            return () => clearInterval(intervalId )
+        }
+
+    }, [showCountdown, currentCountdown]);
 
     return (
         <div className={'overflow-hidden w-screen h-screen flex'}>
@@ -79,7 +104,7 @@ export default function Photobooth() {
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
                 <div className={'bg-[#FF4A8B] z-[10] w-3/5 lg:w-1/5 p-3 rounded-tr-4xl rounded-tl-4xl flex justify-center items-center'}>
-                    {/*TODO font not working. Add buttons here for photo preview*/}
+                    {/*TODO Add buttons here for photo preview*/}
                     <p className={'text-[#FFFFFF] text-xs lg:text-xl font-pressstart2p m-1'}>cheese</p>
                     <p className={'text-[#FFFFFF] text-2xl'}>♡</p>
                 </div>
@@ -109,7 +134,7 @@ export default function Photobooth() {
             </div>
 
             <div className={`w-full h-full absolute flex justify-center items-center ${showCountdown ? '' : 'hidden'}`}>
-                <p className={'text-white font-pressstart2p text-6xl z-15'}>5</p>
+                <p className={'text-white font-pressstart2p text-6xl z-15'}>{currentCountdown}</p>
             </div>
 
         </div>

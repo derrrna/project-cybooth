@@ -1,11 +1,19 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 @font-face {
-    font-family: 'Press Start 2P';
-    src: url('../src/assets/fonts/PressStart2P-Regular.ttf ');
+    font-family: 'Neuropol X';
+    src: url('../src/assets/fonts/Neuropol X Rg.otf');
 }
 
+@font-face {
+    font-family: 'Vipnagorgialla';
+    src: url('../src/assets/fonts/Vipnagorgialla Rg It.otf');
+}
+
+
 @theme {
-    --font-pressstart2p: 'Press Start 2P';
+    --font-neuropol-x: 'Neuropol X';
+    --font-Vipna: 'Vipnagorgialla';
 }
 

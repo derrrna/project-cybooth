@@ -1,4 +1,4 @@
-import './App.css'
+import './index.css'
 import Photobooth from './pages/Photobooth.tsx';
 import Landing from './pages/Landing.tsx'
 import {BrowserRouter, Route, Routes} from "react-router-dom";

@@ -12,7 +12,7 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
 
     return (
         <div className={'bg-[#CDB4DB] z-[11] h-4/5 w-1/8 self-center p-2 rounded-2xl flex flex-col items-center'}>
-            <h1 className={'text-[#FFFFFF] pt-4 font-Vipna tracking-widest'}>my photos</h1>
+            <h1 className={'text-[#FFFFFF] pt-4 font-Vipna tracking-widest text-xs'}>my photos</h1>
 
             {/* Takes the images given to it and displays it */}
             {imageList.map((image) => (

@@ -1,6 +1,7 @@
 export default function LogoBorder(){
     return (
         <div className={'flex'}>
+            {/* TODO reisizing */}
             <div className="w-screen h-screen overflow-hidden absolute z-[11]">
                 <svg className="w-full h-full z-[11]" viewBox="0 0 1920 1080" preserveAspectRatio="none"
                      xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -21,8 +22,8 @@ export default function LogoBorder(){
             </div>
 
             <div className={'w-screen h-screen overflow-hidden z-[12] flex flex-col'}>
-                <h1 className={'font-Vipna text-[#FF659D] text-5xl pl-35 pt-8'}>::cybooth</h1>
-                <h2 className={'font-neuropol-x text-[#98C2E9] text-md pl-50'}> your digital photobooth</h2>
+                <h1 className={'font-Vipna text-[#FF659D] text-4xl pl-25 pt-5'}>::cybooth</h1>
+                <h2 className={'font-neuropol-x text-[#98C2E9] text-sm pl-35'}> your digital photobooth</h2>
                 <h3 className={'self-center mt-auto font-ledlight text-[#FF659D] tracking-widest'}>Made by Danna</h3>
             </div>
         </div>

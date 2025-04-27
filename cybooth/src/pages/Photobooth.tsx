@@ -61,12 +61,25 @@ export default function Photobooth() {
     return (
         <div className={'overflow-hidden w-screen h-screen flex'}>
 
+            {/* chromix layer background 1 - visible for all */}
+            <div className={"w-full h-full absolute flex overflow-hidden opacity-50"}>
+                <img src={'background/chromix_34.png'} className={'scale-90 translate-y-1/5 -translate-x-1/5'}/>
+            </div>
+
+            <div className={'hidden w-full h-full absolute lg:flex overflow-hidden opacity-50'}>
+                <img src={'background/chromix_40.png'} className={'scale-25 -translate-y-5/11 translate-x-1/4'}/>
+                <img src={'background/chromix_28.png'} className={'scale-40  translate-y-2/5 rotate-10'}/>
+                <img src={'background/chromix_29.png'} className={'scale-85 -translate-x-3/5 -translate-y-2/7 rotate-200'}/>
+            </div>
+
+            {/* chromix layer background 1 - visible for latpop only */}
+
             {/* flower layer background 1 - visible for mobile, ipads, laptop */}
             <div className={"w-full h-full absolute flex overflow-hidden"}>
-                <DynamicImage imageSource={"Flower1.png"}
+                <DynamicImage imageSource={"background/Flower1.png"}
                               imageStyle={'z-[20] rotate-90 translate-y-3/7 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}
                               scaleUp={'lg:scale-45 scale-50'} originalScale={'lg:scale-40 scale-40'}/>
-                <DynamicImage imageSource={"Flower1.png"}
+                <DynamicImage imageSource={"background/Flower1.png"}
                               imageStyle={'z-[20] -rotate-85 lg:rotate-180 -translate-y-4/11 -translate-x-5/8 lg:-translate-y-2/5 ' +
                                   'lg:-translate-x-4/9 xl:-translate-x-2/9 object-contain'}
                               scaleUp={'lg:scale-40 scale-60'} originalScale={'lg:scale-30 scale-50'}/>
@@ -74,10 +87,11 @@ export default function Photobooth() {
 
             {/* flower layer background 2 - visible only on laptop */}
             <div className={'hidden w-full h-full absolute lg:flex overflow-hidden'}>
-                <DynamicImage imageSource={"Flower2.png"} originalScale={'scale-20'} scaleUp={'scale-25'}
+                <DynamicImage imageSource={"background/Flower2.png"} originalScale={'scale-20'} scaleUp={'scale-25'}
                               imageStyle={'z-[20] rotate-45 translate-y-2/5 translate-x-4/9 object-contain'}/>
             </div>
 
+            {/* logo border background - visible on both mobile and laptop TODO resize*/}
             <LogoBorder/>
 
             {/* content layer */}
@@ -102,7 +116,7 @@ export default function Photobooth() {
                     className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[18] flex justify-center drop-shadow-[2px_2px_5px_rgba(0,0,0,0.3)] ' +
                         'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77] cursor-pointer'}
                     onClick = {handleCaptureClick}>
-                    <img src={'camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
+                    <img src={'icons/camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
                 </button>
             </div>
 
@@ -111,6 +125,7 @@ export default function Photobooth() {
                 <PhotoPreview imageList={savedPhotos} />
             </div>
 
+            {/* Countdown - active when capture button is pressed. */}
             <div className={`w-full h-full absolute flex justify-center items-center ${showCountdown ? '' : 'hidden'}`}>
                 <p className={'text-white text-6xl z-30 animate-[ping_1.1s_ease-in-out_5] font-press2p'}>{currentCountdown}</p>
             </div>

@@ -112,7 +112,7 @@ export default function Photobooth() {
             </div>
 
             <div className={`w-full h-full absolute flex justify-center items-center ${showCountdown ? '' : 'hidden'}`}>
-                <p className={'text-white text-6xl z-15 animate-[ping_1.1s_ease-in-out_5] font-press2p'}>{currentCountdown}</p>
+                <p className={'text-white text-6xl z-30 animate-[ping_1.1s_ease-in-out_5] font-press2p'}>{currentCountdown}</p>
             </div>
 
         </div>

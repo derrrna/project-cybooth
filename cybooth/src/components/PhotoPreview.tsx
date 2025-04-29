@@ -18,13 +18,15 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
             {imageList.map((image) => (
                 <div className={'w-full h-1/5'}>
                     <DynamicImage imageSource={image.image} key={image.id}
-                                  imageStyle={`object-cover rounded-xl transition-opacity duration-1000 ease-in-out`} originalScale={'scale-80'} scaleUp={'scale-90'}/>
+                                  imageStyle={`object-cover rounded-xl transition-opacity duration-1000 ease-in-out `} originalScale={'scale-80'} scaleUp={'scale-90'}/>
                 </div>
             ))}
 
             {/* TODO implement button. not showing up */}
-            <Link to="/editor" className={'p-4 cursor-pointer overflow-visible flex'}>
-                <img src={'/download-icon.svg'} alt={'download button'} className={'object-fill'}/>
+            <Link to="/editor" className={'w-1/6 h-1/6 bg-black'}>
+                <div className={'w-full h-full bg-white'}>
+                    <img src={'icons/download-icon.svg'} alt={'download button'} className={'w-full h-full self-center'} />
+                </div>
             </Link>
 
         </div>

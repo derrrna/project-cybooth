@@ -1,0 +1,34 @@
+<svg viewBox="0 0 768 812" preserveAspectRatio="none"
+     xmlns="http://www.w3.org/2000/svg" fill="none">
+    <defs>
+        <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="4" stdDeviation="3"
+                          flood-color="black" flood-opacity="0.15"/>
+        </filter>
+    </defs>
+    <path
+            d="
+      M0,0
+      H337.5
+      C345,0 352.5,6 351,12
+      L341,50
+      C339.5,55 335.5,58 332.5,58
+      H15
+      V797
+      H753
+      V15
+      H337.5
+      V0
+      H768
+      V812
+      H15
+      V797
+      H15
+      V812
+      H0
+      Z
+    "
+            fill="#FBFBFB"
+            filter="url(#dropShadow)"
+    />
+</svg>

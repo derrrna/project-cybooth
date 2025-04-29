@@ -1,30 +1,38 @@
 export default function LogoBorder(){
     return (
         <div className={'flex'}>
-            {/* TODO reisizing */}
-            <div className="w-screen h-screen overflow-hidden absolute z-[11]">
-                <svg className="w-full h-full z-[11]" viewBox="0 0 1920 1080" preserveAspectRatio="none"
-                     xmlns="http://www.w3.org/2000/svg" fill="none">
 
-                    <defs>
-                        <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="black" flood-opacity="0.15"/>
-                        </filter>
-                    </defs>
-
-                    <path
-                        d="M0,0 H529.875 C540,0 550.125,15 545.625,30 L510,140 C507,150 500,155 490,155 H36 V1044 H1884
-                        V36 H529.875 V0 H1920 V1080 H0 V0 Z"
-                        fill="#FBFBFB"
-                        filter="url(#dropShadow)"
-                    />
-                </svg>
+            <div className={'w-screen h-screen overflow-hidden absolute z-[13] flex flex-col items-start'}>
+                {/* TODO resizing*/ }
+                <img className={'scale-50 -translate-y-1/2 -translate-x-1/4'} src={'logoborder/chromix_12.svg'}/>
+                <img className={'scale-50 -translate-y-3/2 -translate-x-2/5'} src={'logoborder/chromix_28.svg'}/>
             </div>
 
-            <div className={'w-screen h-screen overflow-hidden z-[12] flex flex-col'}>
-                <h1 className={'font-Vipna text-[#FF659D] text-4xl pl-25 pt-5'}>::cybooth</h1>
-                <h2 className={'font-neuropol-x text-[#98C2E9] text-sm pl-35'}> your digital photobooth</h2>
-                <h3 className={'self-center mt-auto font-ledlight text-[#FF659D] tracking-widest'}>Made by Danna</h3>
+            <div className="w-screen h-screen overflow-hidden absolute z-[11]">
+                {/* A different svg will load based on the breakpoint.*/}
+                <img
+                    className="w-screen h-screen z-[11] absolute hidden lg:block"
+                    src="/logoborder/lg_border.svg"
+                    alt="Logo Border"
+                />
+
+                <img
+                    className="w-screen h-screen z-[11] absolute hidden md:block lg:hidden"
+                    src="/logoborder/md_border.svg"
+                    alt="Logo Border"
+                />
+
+                <img
+                    className="w-screen h-screen z-[11] absolute block md:hidden"
+                    src="/logoborder/sm_border.svg"
+                    alt="Logo Border"
+                />
+            </div>
+
+            <div className={'w-screen h-screen overflow-hidden absolute z-[12] flex flex-col '}>
+                <h1 className={'font-Vipna text-[#FF659D] text-md pl-18 pt-1.5 sm:text-3xl sm:pl-14 sm:pt-2.5 lg:text-4xl lg:pl-30 lg:pt-5'}>::cybooth</h1>
+                <h2 className={'font-neuropol-x text-[#98C2E9] hidden lg:block lg:text-sm lg:pl-40'}> your digital photobooth</h2>
+                <h3 className={'self-center text-xs sm:text-md mt-auto font-ledlight text-[#FF659D] tracking-widest'}>Made by Danna</h3>
             </div>
         </div>
 

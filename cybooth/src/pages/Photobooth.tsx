@@ -5,13 +5,35 @@ import PhotoPreview from "../components/PhotoPreview.tsx";
 import { v4 as uuidv4 } from 'uuid';
 import LogoBorder from "../components/LogoBorder.tsx";
 
+/**
+ * Photobooth Page.
+ */
 export default function Photobooth() {
 
+    /**
+     * The current total number of photos.
+     */
     const [totalNumPhotos, setTotalNumPhotos] = useState(0)
+
+    /**
+     * TODO
+     */
     const webcamRef = useRef(null);
+
+    /**
+     * Boolean set to True if countdown should be displayed.
+     */
     const [showCountdown, setShowCountdown] = useState(false);
+
+    /**
+     * Current value of the countdown as an integer. Initialised to 5.
+     */
     const [currentCountdown, setCurrentCountdown] = useState(5);
 
+    /**
+     * Array containing the 5 most recent photos taken.
+     * Formatted as ID and image source.
+     */
     const [savedPhotos, setSavedPhotos] = useState([
         {id: uuidv4(), image: '/placeholder.jpg'},
         {id: uuidv4(), image: '/placeholder.jpg'},
@@ -19,14 +41,17 @@ export default function Photobooth() {
         {id: uuidv4(), image: '/placeholder.jpg'}
     ])
 
+    /**
+     * Called when the capture button is pressed.
+     */
     const handleCaptureClick = () => {
 
-        // Set countdown to be active if it is already not.
+        // Set countdown to be active.
         if (!showCountdown) {
             setShowCountdown(true)
 
             setTimeout(()=> {
-                // Set the countdown to be inactive once the countdown is finished.
+                // Set the countdown to be inactive only once the countdown is finished.
                 setShowCountdown(false)
                 setCurrentCountdown(5);
 
@@ -47,6 +72,10 @@ export default function Photobooth() {
 
     }
 
+    /**
+     * Changes the value of the countdown given the countdown is active and the current
+     * countdown value is more than 0.
+     */
     useEffect(() => {
 
         // If countdown is active and the current countdown value is more than 0,
@@ -59,6 +88,7 @@ export default function Photobooth() {
     }, [showCountdown, currentCountdown]);
 
     return (
+
         <div className={'overflow-hidden w-screen h-screen flex'}>
 
             {/* chromix layer background 1 - visible for all */}
@@ -87,8 +117,8 @@ export default function Photobooth() {
 
             {/* flower layer background 2 - visible only on laptop */}
             <div className={'hidden w-full h-full absolute lg:flex overflow-hidden'}>
-                <DynamicImage imageSource={"background/Flower2.png"} originalScale={'scale-20'} scaleUp={'scale-25'}
-                              imageStyle={'z-[20] rotate-45 translate-y-2/5 translate-x-4/9 object-contain'}/>
+                {/*<DynamicImage imageSource={"background/Flower2.png"} originalScale={'scale-20'} scaleUp={'scale-25'}*/}
+                {/*              imageStyle={'z-[20] rotate-45 translate-y-2/5 translate-x-4/9 object-contain'}/>*/}
             </div>
 
             {/* logo logoborder background - visible on both mobile and laptop TODO resize*/}

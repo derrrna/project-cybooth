@@ -1,6 +1,7 @@
 import DynamicImage from "./DynamicImage.tsx";
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
+import { motion } from "motion/react";
 
 /**
  * Props passed to PhotoPreview.
@@ -35,7 +36,10 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
 
             {/* Button leading to editor page */}
             <Link to="/editor" className={'w-1/8 h-1/8'}>
-                <img src={'icons/download-icon.svg'} alt={'download button'} className={'w-full h-full self-center'} />
+                <motion.img
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 1.0 }}
+                    src={'icons/download-icon.svg'} alt={'download button'} className={'w-full h-full self-center'} />
             </Link>
 
         </div>

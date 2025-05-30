@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import {useState} from "react";
 
 interface DynamicImageProps {
@@ -12,8 +13,14 @@ export default function DynamicImage({imageSource, imageStyle, scaleUp, original
     const [isHovering, setIsHovering] = useState(false);
 
     return (
-            <img src={imageSource} alt="image" onMouseOver={()=>setIsHovering(true)} onTouchStart={()=>setIsHovering(true)}
-                 onMouseLeave={()=>setIsHovering(false)} onTouchEnd={()=>setIsHovering(false)}
-                 className={`h-full w-full transform transition-transform duration-500 ${imageStyle} ${isHovering ? `${scaleUp}` : `${originalScale}`}`}/>
+            <motion.img
+                initial={{ scale: 0 }} animate={{ scale: 1 }}
+                src={imageSource} alt="image"
+                onMouseOver={()=>setIsHovering(true)}
+                onTouchStart={()=>setIsHovering(true)}
+                onMouseLeave={()=>setIsHovering(false)}
+                onTouchEnd={()=>setIsHovering(false)}
+                className={`h-full w-full transform transition-transform duration-500 ${imageStyle} ${isHovering ? `${scaleUp}` : `${originalScale}`}`}
+            />
         )
 }

@@ -41,6 +41,8 @@ export default function Photobooth() {
         {id: uuidv4(), image: '/placeholder.jpg'},
         {id: uuidv4(), image: '/placeholder.jpg'}
     ])
+    
+    const [toggleViewPhotos, setToggleViewPhotos] = useState(false)
 
     /**
      * Called when the capture button is pressed.
@@ -70,7 +72,6 @@ export default function Photobooth() {
 
             }, 5000)
         }
-
     }
 
     /**
@@ -132,16 +133,36 @@ export default function Photobooth() {
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
-                <div className={'bg-[#FF4A8B] z-[18] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex justify-center items-center' +
-                    ' drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]'}>
-                    {/*TODO Add buttons here for photo preview*/}
+                <div className={'bg-[#FF4A8B] z-[19] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex ' +
+                    ' drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center '}>
+
                     <p className={'text-[#FFFFFF] text-xs lg:text-md font-neuropol-x m-0.5'}>cheese ★</p>
+
+                    {/*TODO Fix toggle switch.*/}
+
+                    <motion.button
+                        className={`w-1/5 h-full cursor-pointer z-[20] rounded-3xl p-1 ml-3 flex`}
+                        onClick={() => setToggleViewPhotos(!toggleViewPhotos)}
+                        animate={{ backgroundColor: toggleViewPhotos ? '#ffffff' : '#E4447E'}}
+                        transition={{backgroundColor: {duration: 0.2, ease: 'easeInOut'}}}
+                    >
+                        <motion.div
+                            className={'w-2/5 h-full bg-white z-[38] rounded-3xl'}
+                            animate={{ backgroundColor: toggleViewPhotos ? '#E4447E' : '#ffffff',
+                                justifySelf: toggleViewPhotos ? 'start' : 'end'
+                            }}
+
+                            whileHover={{ backgroundColor: toggleViewPhotos ? '#E40087': '#ECECEC'}}
+
+                            transition={{type: "spring", duration: 1, bounce: 0.3}}
+                        />
+                    </motion.button>
+
                 </div>
 
                 {/* Webcam */}
-
                 <Webcam
-                    className={'z-[18] rounded-3xl object-cover h-3/5 w-3/4 lg:w-3/7 lg:h-5/7'}
+                    className={'z-[19] rounded-3xl object-cover h-3/5 w-3/4 lg:w-3/7 lg:h-5/7'}
                     audio={false}
                     screenshotFormat={"image/jpeg"}
                     screenshotQuality={1}
@@ -151,8 +172,11 @@ export default function Photobooth() {
 
                 {/* Capture button */}
                 <motion.button
-                    className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[28] flex justify-center drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] ' +
-                        'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77] cursor-pointer'}
+                    className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[28] flex justify-center ' +
+                        'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] rounded-br-3xl rounded-bl-3xl cursor-pointer'}
+
+                    whileHover={{backgroundColor: "#fa2d77"}}
+
                     onClick = {handleCaptureClick}>
                     <img src={'icons/camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
                 </motion.button>

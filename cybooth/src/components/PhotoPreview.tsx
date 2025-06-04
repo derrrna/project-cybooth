@@ -39,8 +39,9 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
             {/* Button leading to editor page */}
             <Link to="/editor" className={'w-1/8 h-1/8'}>
                 <motion.img
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 1.0 }}
+                    initial={{opacity: 0.7}}
+                    whileHover={{ opacity: 1, scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     src={'icons/download-icon.svg'} alt={'download button'} className={'w-full h-full self-center'} />
             </Link>
 

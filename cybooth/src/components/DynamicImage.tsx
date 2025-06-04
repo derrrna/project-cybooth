@@ -14,7 +14,7 @@ export default function DynamicImage({imageSource, imageStyle, scaleUp, original
 
     return (
             <motion.img
-                initial={{ scale: 0 }} animate={{ scale: 1 }}
+                initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 0.3 }}
                 src={imageSource} alt="image"
                 onMouseOver={()=>setIsHovering(true)}
                 onTouchStart={()=>setIsHovering(true)}

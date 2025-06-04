@@ -4,6 +4,7 @@ import {useState, useRef, useEffect} from "react";
 import PhotoPreview from "../components/PhotoPreview.tsx";
 import { v4 as uuidv4 } from 'uuid';
 import LogoBorder from "../components/LogoBorder.tsx";
+import { motion } from "motion/react";
 
 /**
  * Photobooth Page.
@@ -89,7 +90,12 @@ export default function Photobooth() {
 
     return (
 
-        <div className={'overflow-hidden w-screen h-screen flex'}>
+        <motion.div
+            className={'overflow-hidden w-screen h-screen flex'}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 3.0 }}
+        >
 
             {/* chromix layer background 1 - visible for all */}
             <div className={"w-full h-full absolute flex overflow-hidden opacity-40"}>
@@ -126,12 +132,14 @@ export default function Photobooth() {
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
-                <div className={'bg-[#FF4A8B] z-[18] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex justify-center items-center'}>
+                <div className={'bg-[#FF4A8B] z-[18] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex justify-center items-center' +
+                    ' drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]'}>
                     {/*TODO Add buttons here for photo preview*/}
                     <p className={'text-[#FFFFFF] text-xs lg:text-md font-neuropol-x m-0.5'}>cheese ★</p>
                 </div>
 
                 {/* Webcam */}
+
                 <Webcam
                     className={'z-[18] rounded-3xl object-cover h-3/5 w-3/4 lg:w-3/7 lg:h-5/7'}
                     audio={false}
@@ -142,12 +150,12 @@ export default function Photobooth() {
                 />
 
                 {/* Capture button */}
-                <button
-                    className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[28] flex justify-center drop-shadow-[2px_2px_5px_rgba(0,0,0,0.3)] ' +
+                <motion.button
+                    className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[28] flex justify-center drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] ' +
                         'rounded-br-3xl rounded-bl-3xl hover:bg-[#fa2d77] cursor-pointer'}
                     onClick = {handleCaptureClick}>
                     <img src={'icons/camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
-                </button>
+                </motion.button>
             </div>
 
             {/* Photo Preview component - visible on laptop only */}
@@ -160,7 +168,7 @@ export default function Photobooth() {
                 <p className={'text-white text-6xl z-30 animate-[ping_1.1s_ease-in-out_5] font-press2p'}>{currentCountdown}</p>
             </div>
 
-        </div>
+        </motion.div>
     )
 }
 

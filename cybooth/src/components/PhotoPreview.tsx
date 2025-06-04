@@ -20,7 +20,9 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
     useEffect(() => {}, [imageList]);
 
     return (
-        <div className={'bg-[#CDB4DB] z-[11] h-4/5 w-1/8 self-center p-2 rounded-2xl flex flex-col items-center'}>
+        <div className={'bg-[#CDB4DB] z-[11] h-4/5 w-1/8 self-center p-2 rounded-2xl flex flex-col items-center ' +
+            'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]'}>
+
             <h1 className={'text-[#FFFFFF] pt-4 font-Vipna tracking-widest text-xs'}>my photos</h1>
 
             {/* Takes the images given to it and displays it */}

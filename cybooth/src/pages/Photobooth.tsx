@@ -133,12 +133,12 @@ export default function Photobooth() {
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
-                <div className={'bg-[#FF4A8B] z-[19] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex ' +
+
+                {/* Topbar */}
+                <div className={'bg-[#FF4A8B] z-[28] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex ' +
                     ' drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center '}>
 
                     <p className={'text-[#FFFFFF] text-xs lg:text-md font-neuropol-x m-0.5'}>cheese ★</p>
-
-                    {/*TODO Fix toggle switch.*/}
 
                     <motion.button
                         className={`w-1/5 h-full cursor-pointer z-[20] rounded-3xl p-1 ml-3 flex ${toggleViewPhotos ? 'justify-end' : 'justify-start'}`}
@@ -175,14 +175,15 @@ export default function Photobooth() {
                     whileHover={{backgroundColor: "#fa2d77"}}
 
                     onClick = {handleCaptureClick}>
-                    <img src={'icons/camera-icon.svg'} alt="camera icon" className={'w-1/4'}/>
+                    <motion.img src={'icons/camera-icon.svg'} alt="camera icon" className={'w-1/4'}
+                                whileHover={{scale:1.2}} whileTap={{scale: 1.05}}/>
                 </motion.button>
             </div>
 
             {/* Photo Preview component - visible on laptop only */}
-            <motion.div
-                className={'w-full h-full absolute hidden lg:flex overflow-hidden justify-end pr-[6vw] z-18'}
-            >
+            <motion.div className={`w-full h-full absolute flex overflow-hidden lg:pr-[6vw] lg:z-[18] justify-center lg:justify-end`}
+                        animate = {{opacity: toggleViewPhotos ? 0 : 1}}
+                        transition={{opacity: {duration: 0.2}}}>
                 <PhotoPreview imageList={savedPhotos} />
             </motion.div>
 

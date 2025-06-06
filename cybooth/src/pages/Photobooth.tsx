@@ -141,20 +141,17 @@ export default function Photobooth() {
                     {/*TODO Fix toggle switch.*/}
 
                     <motion.button
-                        className={`w-1/5 h-full cursor-pointer z-[20] rounded-3xl p-1 ml-3 flex`}
+                        className={`w-1/5 h-full cursor-pointer z-[20] rounded-3xl p-1 ml-3 flex ${toggleViewPhotos ? 'justify-end' : 'justify-start'}`}
                         onClick={() => setToggleViewPhotos(!toggleViewPhotos)}
-                        animate={{ backgroundColor: toggleViewPhotos ? '#ffffff' : '#E4447E'}}
-                        transition={{backgroundColor: {duration: 0.2, ease: 'easeInOut'}}}
-                    >
+                        animate={{backgroundColor: toggleViewPhotos ? '#ffffff' : '#E4447E',}}
+                        transition={{backgroundColor: {duration: 0.2, ease: 'easeInOut'}}}>
+
                         <motion.div
                             className={'w-2/5 h-full bg-white z-[38] rounded-3xl'}
-                            animate={{ backgroundColor: toggleViewPhotos ? '#E4447E' : '#ffffff',
-                                justifySelf: toggleViewPhotos ? 'start' : 'end'
-                            }}
-
+                            layout
+                            animate={{ backgroundColor: toggleViewPhotos ? '#E4447E' : '#ffffff'}}
                             whileHover={{ backgroundColor: toggleViewPhotos ? '#E40087': '#ECECEC'}}
-
-                            transition={{type: "spring", duration: 1, bounce: 0.3}}
+                            transition={{type: "spring", visualDuration: 0.2, bounce: 0.2}}
                         />
                     </motion.button>
 
@@ -183,9 +180,11 @@ export default function Photobooth() {
             </div>
 
             {/* Photo Preview component - visible on laptop only */}
-            <div className={'w-full h-full absolute hidden lg:flex overflow-hidden justify-end pr-[6vw] z-18'}>
+            <motion.div
+                className={'w-full h-full absolute hidden lg:flex overflow-hidden justify-end pr-[6vw] z-18'}
+            >
                 <PhotoPreview imageList={savedPhotos} />
-            </div>
+            </motion.div>
 
             {/* Countdown - active when capture button is pressed. */}
             <div className={`w-full h-full absolute flex justify-center items-center ${showCountdown ? '' : 'hidden'}`}>

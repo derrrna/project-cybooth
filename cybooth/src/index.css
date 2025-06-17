@@ -1,1 +1,30 @@
 @import "tailwindcss";
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Neuropol X';
+    src: url('../src/assets/fonts/Neuropol X Rg.otf');
+}
+
+@font-face {
+    font-family: 'Vipnagorgialla';
+    src: url('../src/assets/fonts/Vipnagorgialla Rg It.otf');
+}
+
+@font-face {
+    font-family: "Press Start 2P";
+    src: url('../src/assets/fonts/PressStart2P-Regular.ttf');
+}
+
+@font-face {
+    font-family: "LEDLIGHT";
+    src: url('../src/assets/fonts/LEDLIGHT.otf');
+}
+
+@theme {
+    --font-neuropol-x: 'Neuropol X';
+    --font-Vipna: 'Vipnagorgialla';
+    --font-press2p: 'Press Start 2P';
+    --font-ledlight: 'LEDLIGHT';
+}
+

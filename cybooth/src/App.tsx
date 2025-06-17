@@ -1,14 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './index.css'
+import Photobooth from './pages/Photobooth.tsx';
+import Landing from './pages/Landing.tsx'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import PhotoEditor from "./pages/PhotoEditor.tsx";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>hi</h1>
+        <BrowserRouter>
+            <Routes>
+                <Route path={"/"} Component={Landing} />
+                <Route path={"/photobooth"} Component={Photobooth} />
+                <Route path={"/editor"} Component={PhotoEditor}/>
+            </Routes>
+        </BrowserRouter>
     </>
   )
 }

@@ -3,7 +3,7 @@
     <defs>
         <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
             <feDropShadow dx="0" dy="4" stdDeviation="3"
-                          flood-color="black" flood-opacity="0.15"/>
+                          flood-color="black" flood-opacity="0.05"/>
         </filter>
     </defs>
     <path

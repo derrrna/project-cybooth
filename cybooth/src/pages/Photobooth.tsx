@@ -95,7 +95,7 @@ export default function Photobooth() {
             className={'overflow-hidden w-screen h-screen flex'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 3.0 }}
+            transition={{ duration: 2.0, ease: "easeIn"}}
         >
 
             {/* chromix layer background 1 - visible for all */}

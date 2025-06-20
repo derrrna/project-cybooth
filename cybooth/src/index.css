@@ -21,10 +21,16 @@
     src: url('../src/assets/fonts/LEDLIGHT.otf');
 }
 
+@font-face {
+    font-family: "W95FA";
+    src: url('../src/assets/fonts/W95FA.otf');
+}
+
 @theme {
     --font-neuropol-x: 'Neuropol X';
     --font-Vipna: 'Vipnagorgialla';
     --font-press2p: 'Press Start 2P';
     --font-ledlight: 'LEDLIGHT';
+    --font-w95fa: 'W95FA';
 }
 

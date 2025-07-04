@@ -22,7 +22,7 @@
 }
 
 @font-face {
-    font-family: "W95FA";
+    font-family: "w95fa";
     src: url('../src/assets/fonts/W95FA.otf');
 }
 
@@ -31,6 +31,6 @@
     --font-Vipna: 'Vipnagorgialla';
     --font-press2p: 'Press Start 2P';
     --font-ledlight: 'LEDLIGHT';
-    --font-w95fa: 'W95FA';
+    --font-w95fa: 'w95fa';
 }
 

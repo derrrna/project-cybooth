@@ -1,5 +1,7 @@
 import { motion } from "motion/react";
 import LogoBorder from "../components/LogoBorder.tsx";
+import SaveOptionButton from "../components/SaveOptionButton.tsx";
+import SwatchStyleButton from "../components/SwatchStyleButton.tsx";
 
 export default function PhotoEditor() {
     return (
@@ -21,6 +23,8 @@ export default function PhotoEditor() {
                 </div>
             </div>
 
+            <LogoBorder/>
+
             {/* Customization Layer */}
             <div className={'w-full h-full absolute overflow-hidden flex'}>
                 <div className={'w-1/2 h-full flex justify-center items-center'}>
@@ -28,17 +32,10 @@ export default function PhotoEditor() {
                     {/* Save Section */}
                     <div className={'bg-[#FFF2F7] w-1/3 h-1/5 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-3xl p-6 flex flex-col'}>
                         <h2 className={'w-full text-center text-[#FF4A8B] font-press2p'}>save</h2>
-                        <div className={'flex w-full mt-5 justify-between'}>
-                            {/*TODO*/}
-                            <button>
-                                save
-                            </button>
-                            <button>
-                                save
-                            </button>
-                            <button>
-                                save
-                            </button>
+                        <div className={'flex w-full mt-5 gap-5 justify-center'}>
+                            <SaveOptionButton iconSrc={'icons/pdf-icon.svg'}/>
+                            <SaveOptionButton iconSrc={'icons/image-icon.svg'}/>
+                            <SaveOptionButton iconSrc={'icons/print-icon.svg' }/>
                         </div>
                     </div>
                 </div>
@@ -47,45 +44,45 @@ export default function PhotoEditor() {
                 <div className={'w-1/2 h-full flex flex-col justify-center items-center'}>
 
                     {/* Style Section */}
-                    <div className={'bg-[#FFF2F7] w-1/3 h-1/3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-3xl p-6 flex items-center flex-col'}>
-                        <h3 className={'text-[#FF4A8B] mb-5'}>style</h3>
+                    <div className={'bg-[#FFF2F7] w-1/3 h-1/3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-3xl p-6 flex items-center flex-col z-[20]'}>
+                        <h3 className={'text-[#FF4A8B] mb-5 font-w95fa text-xl'}>style</h3>
 
                         {/* Themed */}
-                        <div className={'bg-amber-600 w-full m-4 flex justify-between'}>
-                            <button>style</button>
-                            <button>style</button>
-                            <button>style</button>
-                            <button>style</button>
+                        <div className={'w-full  flex justify-between z-[25]'}>
+                            <SwatchStyleButton/>
+                            <SwatchStyleButton/>
+                            <SwatchStyleButton/>
+                            <SwatchStyleButton/>
                         </div>
 
                         {/* Simple*/}
-                        <div className={'bg-amber-600 w-full flex m-4 justify-between'}>
-                            <button>style</button>
-                            <button>style</button>
-                            <button>style</button>
-                            <button>style</button>
+                        <div className={'w-full flex m-4 justify-between'}>
+                            <SwatchStyleButton/>
+                            <SwatchStyleButton/>
+                            <SwatchStyleButton/>
+                            <SwatchStyleButton/>
                         </div>
 
                     </div>
 
                     {/* Orientation Section */}
-                    <div className={'flex bg-[#FFF2F7] w-1/4 h-1/15 mt-10 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-xl p-5 justify-between items-center mr-45'}>
-                        <h3>orientation</h3>
-                        <button>
-                            save
-                        </button>
+                    <div className={'flex bg-[#FFF2F7] w-[22%] h-1/15 mt-10 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-xl p-5 justify-between items-center mr-45'}>
+                        <h3 className={'font-w95fa text-[#FF4A8B] text-xl'}>orientation</h3>
+                        <motion.button
+                            className={'bg-[#FF4A8B] rounded-lg w-1/4 p-2 z-[25] cursor-pointer'}
+                            whileHover={{backgroundColor: "#fa2d77"}}>
+                            <img src={'/icons/rotate-icon.svg'}/>
+                        </motion.button>
                     </div>
 
                 </div>
             </div>
 
             {/* Photo-strip Preview */}
-            <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center'}>
+            <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center z-[10]'}>
                 <img src={'sample_photostrip.png'} className={'rounded-2xl border-4 border-[#FFAFCC] ' +
                     'shadow-[5px_6px_11.9px_3px_rgba(0,0,0,0.15)] z-20 h-5/6'}/>
             </div>
-
-            <LogoBorder/>
 
         </motion.div>
     )

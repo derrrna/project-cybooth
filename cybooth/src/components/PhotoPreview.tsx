@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 
 /**
  * Props passed to PhotoPreview.
+ * //TODO double check
  */
 interface PhotoPreviewProps {
     imageList: Array<{id: string, image: string}>;

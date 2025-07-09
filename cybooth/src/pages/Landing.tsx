@@ -1,51 +1,60 @@
 import { motion } from "motion/react";
 import {Link} from "react-router-dom";
 
-export default function Landing(){
+export default function Landing() {
+
+    const motionLink = motion.create(Link)
+
     return (
         <motion.div
-            className={'overflow-hidden w-screen h-screen '}
+            className={'overflow-hidden w-screen h-screen relative'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2.0, ease: "easeIn" }}
         >
             {/* Background */}
-            <div className={' absolute w-full h-full flex'}>
+            <div className={'absolute w-full h-full flex'}>
 
-                {/*Visible on laptop only*/}
-                <div className={'hidden lg:flex w-3/4 h-full'}>
-                    <img src={'landingBg/chromix_10.png'} className={'opacity-50 ml-auto -translate-y-1/2 translate-x-2/7'}/>
+                {/* Background - Visible on laptop only*/}
+                <div className={'hidden lg:block w-3/4 h-full relative'}>
+                    <img src={'landingBg/chromix_10.png'}
+                         className={'absolute opacity-50 bottom-[30%] left-[25%] scale-90'}
+                         alt={""}/>
                 </div>
 
-                {/*Visible on all screens*/}
-                <div className={'w-full lg:w-1/2 h-full overflow-hidden'}>
+                {/* Background - Visible on all screens*/}
+                <div className={'w-full lg:w-1/2 h-full overflow-hidden relative'}>
                     <img src={'landingBg/chromix_35.png'}
-                         className={'scale-150 -translate-x-1/2 -translate-y-1/3 lg:-translate-x-0 lg:scale-90 opacity-74 lg:-translate-y-1/4'}/>
-                    <img src={'landingBg/chromix_31.png'} className={'hidden lg:flex -translate-y-1/2 scale-100 translate-x-1/8 opacity-30'}/>
-                    <img src={'landingBg/chromix_10.png'} className={'scale-130 lg:hidden flex opacity-50 -translate-y-1/8 rotate-180'} />
-                </div>
+                         alt={""}
+                         className={'absolute opacity-75 scale-150 lg:scale-90 bottom-[25%]'}/>
 
+                    <img src={'landingBg/chromix_31.png'}
+                         alt={""}
+                         className={'hidden lg:block absolute scale-100 opacity-30 top-[50%]'}/>\
+
+                    {/*TODO fix translate*/}
+                    <img src={'landingBg/chromix_10.png'}
+                         alt={""}
+                         className={'scale-125 lg:hidden flex opacity-50 -translate-y-[12.5%] rotate-180'} />
+                </div>
             </div>
 
             {/* Content */}
             <div className={'absolute w-full h-full flex flex-col lg:flex-row'}>
 
                 {/* Text Content*/}
-                <div className={'w-full lg:w-3/5 flex flex-col z-20'}>
+                <div className={'w-full lg:w-3/5 flex flex-col z-20 items-center justify-center cursor-default'}>
 
-                    {/*Logo*/}
-                    <div className={'lg:h-1/4'}>
+                    {/* Text */}
+                    <div className={'lg:pt-20 lg:z-20 cursor-default'}>
                         <motion.h2
-                            className={'font-Vipna text-[#FF4A8B] pt-35 pl-10 text-md lg:p-20 cursor-pointer'}
+                            className={'font-Vipna text-[#FF4A8B] text-sm sm:text-base cursor-pointer'}
                             whileHover={{ color: '#E4447E' }}>
                             cybooth
                         </motion.h2>
-                    </div>
 
-                    {/* Text */}
-                    <div className={'lg:pl-50 lg:z-20 cursor-default'}>
                         <motion.h1
-                            className={'font-neuropol-x text-4xl justify-self-center lg:justify-self-start lg:text-7xl lg:pt-15 '}
+                            className={'font-neuropol-x text-3xl sm:text-4xl lg:text-7xl '}
                             animate={{ color: ["#FF4A8B", "#E4447E", "#FF4A8B"] }}
                             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                         >
@@ -61,7 +70,7 @@ export default function Landing(){
 
                         {/*Button*/}
                         <motion.div
-                            className={'bg-[#FF4A8B] rounded-lg w-1/6 ml-70 lg:ml-0 lg:w-1/8 flex justify-center mt-20 z-20'}
+                            className={'bg-[#FF4A8B] rounded-lg w-1/6 lg:w-[12.5%] flex justify-center mt-20 z-20'}
                             whileHover={{ backgroundColor: '#E4447E' }}
                             whileTap={{scale:0.9}}
                         >
@@ -73,14 +82,14 @@ export default function Landing(){
                 </div>
 
                 {/* Sample Photostrip Image */}
-                <div className={'w-1/2 lg:w-2/5 flex justify-center h-full lg:p-20'}>
+                <div className={'w-2/5 flex h-screen justify-center items-center'}>
                     <motion.img
                         src={'sample_photostrip.png'}
-                        className={'-rotate-10 lg:-rotate-0 -translate-y-1/10 rounded-2xl border-4 border-[#FFAFCC] object-fill ' +
-                            'shadow-[5px_6px_11.9px_3px_rgba(0,0,0,0.15)] z-20 lg:-translate-y-0'}
+                        alt={'photostrip example image'}
+                        className={'-rotate-10 lg:-rotate-0 lg:max-w-1/3 ' +
+                            'rounded-2xl border-4 border-[#FFAFCC] shadow-[5px_6px_11.9px_3px_rgba(0,0,0,0.15)]'}
                         animate={{ y: [0, -10, 0] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    />
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}/>
                 </div>
             </div>
 

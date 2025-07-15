@@ -92,44 +92,42 @@ export default function Photobooth() {
     return (
 
         <motion.div
-            className={'overflow-hidden w-screen h-screen flex'}
+            className={'overflow-hidden w-screen h-screen relative'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2.0, ease: "easeIn"}}
         >
+            {/* Background Accessories - visible for all screens */}
+            <img src={'background/chromix_29.png'} aria-hidden={true} alt={""}
+                 className={'absolute opacity-40 lg:scale-[45%] lg:left-[35%] lg:-top-[85%] lg:rotate-10'}/>
 
-            {/* chromix layer background 1 - visible for all */}
-            <div className={"w-full h-full absolute flex overflow-hidden opacity-40"}>
-                <img src={'background/chromix_29.png'} className={'scale-90 lg:scale-90 md:scale-100 lg:translate-y-1/5 lg:-translate-x-2/9 ' +
-                    'lg:object-contain lg:rotate-0 rotate-180 object-cover'} />
-            </div>
+            {/* Background Accessories - visible for laptop only */}
+            <img src={'background/chromix_40.png'} aria-hidden={true} alt={""}
+                 className={'absolute hidden opacity-50 lg:block lg:scale-[15%] lg:-bottom-[12%] lg:right-[10%]'} />
 
-            {/* chromix layer background 1 - visible for laptop only */}
-            <div className={'hidden w-full h-full absolute lg:flex overflow-hidden opacity-40'}>
-                <img src={'background/chromix_40.png'} className={'scale-25 -translate-y-5/11 translate-x-1/4'}/>
-                <img src={'background/chromix_28.png'} className={'scale-40  translate-y-2/5 rotate-10'}/>
-                <img src={'background/chromix_34.png'} className={'scale-65 -translate-x-3/5 -translate-y-2/7 rotate-165'}/>
-            </div>
+            <img src={'background/chromix_28.png'} aria-hidden={true} alt={""}
+                 className={'absolute hidden opacity-45 lg:block lg:scale-[20%] lg:left-[25%] lg:-top-[18%]'} />
 
-            {/* flower layer background 1 - visible for mobile, ipads, laptop */}
-            <div className={"w-full h-full absolute flex overflow-hidden"}>
-                <DynamicImage imageSource={"background/Flower1.png"}
-                              imageStyle={'z-[20] rotate-90 translate-y-4/9 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}
-                              scaleUp={'lg:scale-45 md:scale-35 scale-50'} originalScale={'lg:scale-40 md:scale-30 scale-40'}/>
-                <DynamicImage imageSource={"background/Flower1.png"}
-                              imageStyle={'z-[20] -rotate-85 lg:rotate-180 -translate-y-5/11 -translate-x-5/8 lg:-translate-y-2/5 ' +
-                                  'lg:-translate-x-4/9 xl:-translate-x-2/9 object-contain'}
-                              scaleUp={'lg:scale-40 md:scale-45 scale-60'} originalScale={'lg:scale-30 md:scale-40 scale-50'}/>
-            </div>
+            <img src={'background/chromix_34.png'} aria-hidden={true} alt={""}
+                 className={'hidden absolute opacity-40 lg:block lg:scale-[45%] lg:right-[30%] lg:-top-[35%]'} />
 
-            {/* flower layer background 2 - visible only on laptop */}
-            <div className={'hidden w-full h-full absolute lg:flex overflow-hidden'}>
-                {/*<DynamicImage imageSource={"background/Flower2.png"} originalScale={'scale-20'} scaleUp={'scale-25'}*/}
-                {/*              imageStyle={'z-[20] rotate-45 translate-y-2/5 translate-x-4/9 object-contain'}/>*/}
-            </div>
+            {/* Flower Layer - visible for all screens */}
+
+            {/*<div className={"w-full h-full absolute flex overflow-hidden"}>*/}
+            {/*    <DynamicImage imageSource={"background/Flower1.png"}*/}
+            {/*                  imageStyle={'z-[20] rotate-90 translate-y-4/9 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}*/}
+            {/*                  scaleUp={'lg:scale-45 md:scale-35 scale-50'} originalScale={'lg:scale-40 md:scale-30 scale-40'}/>*/}
+            {/*    <DynamicImage imageSource={"background/Flower1.png"}*/}
+            {/*                  imageStyle={'z-[20] -rotate-85 lg:rotate-180 -translate-y-5/11 -translate-x-5/8 lg:-translate-y-2/5 ' +*/}
+            {/*                      'lg:-translate-x-4/9 xl:-translate-x-2/9 object-contain'}*/}
+            {/*                  scaleUp={'lg:scale-40 md:scale-45 scale-60'} originalScale={'lg:scale-30 md:scale-40 scale-50'}/>*/}
+            {/*</div>*/}
+
+            <motion.img src={'background/Flower1.png'} aria-hidden={true} alt={""} whileHover={{scale:1.2}} initial={{scale:1.0}}
+                className={'absolute'}/>
 
             {/* logo logoborder background - visible on both mobile and laptop TODO resize*/}
-            <LogoBorder/>
+            {/*<LogoBorder/>*/}
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>

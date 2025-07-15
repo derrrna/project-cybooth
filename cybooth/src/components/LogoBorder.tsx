@@ -2,10 +2,10 @@ export default function LogoBorder(){
     return (
         <div className={'flex'}>
 
-            <div className={'w-screen h-screen overflow-hidden absolute z-[13] flex flex-col items-start'}>
+            <div className={'w-screen h-screen overflow-hidden relative z-[13] flex flex-col items-start'}>
                 {/* TODO resizing*/ }
-                <img className={'scale-50 -translate-y-1/2 -translate-x-1/4'} src={'logoborder/chromix_12.svg'}/>
-                <img className={'scale-50 -translate-y-3/2 -translate-x-2/5'} src={'logoborder/chromix_28.svg'}/>
+                <img className={'scale-50 top-[50%] right-[25%]'} src={'logoborder/chromix_12.svg'}/>
+                <img className={'scale-50 top-[30%] -translate-x-2/5'} src={'logoborder/chromix_28.svg'}/>
             </div>
 
             <div className="w-screen h-screen overflow-hidden absolute z-[11]">

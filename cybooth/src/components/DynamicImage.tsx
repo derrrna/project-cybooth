@@ -8,6 +8,7 @@ interface DynamicImageProps {
     originalScale: string;
 }
 
+// edit props
 export default function DynamicImage({imageSource, imageStyle, scaleUp, originalScale}: DynamicImageProps) {
 
     const [isHovering, setIsHovering] = useState(false);

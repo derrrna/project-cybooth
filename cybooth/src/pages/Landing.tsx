@@ -1,10 +1,15 @@
 import { motion } from "motion/react";
 import {Link} from "react-router-dom";
 
+// Transforms normal Link component into a Motion animate-able component.
 const MotionLink = motion(Link)
 
-// TODO: make mobile responsive.
-
+/**
+ * Landing Page Component
+ *
+ * TODO: make mobile responsive.
+ * @constructor
+ */
 export default function Landing() {
 
     return (
@@ -14,17 +19,16 @@ export default function Landing() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.0, ease: "easeIn" }}
         >
-            {/* Background */}
+            {/* BACKGROUND SECTION */}
             <div className={'absolute w-full h-full flex'}>
 
-                {/* Background Accessories */}
+                {/* Chromix Blobs - Visible for all screens */}
                 <div className={'hidden lg:block w-3/4 h-full relative'}>
                     <img src={'landingBg/chromix_10.png'}
                          className={'absolute opacity-50 bottom-[30%] left-[25%] scale-90 xl:bottom-[40%]'}
                          aria-hidden={true}
                          alt={""}/>
                 </div>
-
                 <div className={'w-full lg:w-1/2 h-full overflow-hidden relative'}>
                     <img src={'landingBg/chromix_35.png'}
                          aria-hidden={true}
@@ -44,10 +48,9 @@ export default function Landing() {
                 </div>
             </div>
 
-            {/* Content */}
+            {/* CONTENT SECTION */}
             <div className={'absolute w-full h-full flex flex-col lg:flex-row'}>
 
-                {/* Text Content*/}
                 <div className={'w-full lg:w-3/5 flex flex-col z-20 items-center justify-center cursor-default'}>
 
                     <div className={'pt-18 lg:pt-20 lg:z-20 cursor-default'}>

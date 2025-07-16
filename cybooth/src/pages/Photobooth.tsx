@@ -1,4 +1,3 @@
-import DynamicImage from "../components/DynamicImage.tsx";
 import Webcam from 'react-webcam';
 import {useState, useRef, useEffect} from "react";
 import PhotoPreview from "../components/PhotoPreview.tsx";
@@ -7,13 +6,11 @@ import LogoBorder from "../components/LogoBorder.tsx";
 import { motion } from "motion/react";
 
 /**
- * Photobooth Page.
+ * Photobooth Page Component
  */
 export default function Photobooth() {
 
-    /**
-     * The current total number of photos.
-     */
+     // The current total number of photos.
     const [totalNumPhotos, setTotalNumPhotos] = useState(0)
 
     /**
@@ -97,37 +94,36 @@ export default function Photobooth() {
             animate={{ opacity: 1 }}
             transition={{ duration: 2.0, ease: "easeIn"}}
         >
-            {/* Background Accessories - visible for all screens */}
+            {/* BACKGROUND SECTION */}
+
+            {/* Chromix Blobs - Visible for all screens */}
             <img src={'background/chromix_29.png'} aria-hidden={true} alt={""}
                  className={'absolute opacity-40 lg:scale-[45%] lg:left-[35%] lg:-top-[85%] lg:rotate-10'}/>
 
-            {/* Background Accessories - visible for laptop only */}
+            {/* Chromix Blobs - Visible for laptop only */}
             <img src={'background/chromix_40.png'} aria-hidden={true} alt={""}
                  className={'absolute hidden opacity-50 lg:block lg:scale-[15%] lg:-bottom-[12%] lg:right-[10%]'} />
-
             <img src={'background/chromix_28.png'} aria-hidden={true} alt={""}
                  className={'absolute hidden opacity-45 lg:block lg:scale-[20%] lg:left-[25%] lg:-top-[18%]'} />
-
             <img src={'background/chromix_34.png'} aria-hidden={true} alt={""}
                  className={'hidden absolute opacity-40 lg:block lg:scale-[45%] lg:right-[30%] lg:-top-[35%]'} />
 
-            {/* Flower Layer - visible for all screens */}
+            {/* Flowers - Visible for all screen */}
+            <div className={"w-full h-full absolute flex overflow-hidden"}>
+                <motion.img
+                    src={"background/Flower1.png"} aria-hidden={true} alt={""}
+                    initial={{ scale: 0.4 }} whileHover={{ scale: 0.48 }} transition={{ duration: 0.3, ease: "easeOut" }}
+                    className={'z-[20] rotate-90 translate-y-4/9 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}
+                />
+                <motion.img
+                    src={"background/Flower1.png"} aria-hidden={true} alt={""}
+                    initial={{ scale: 0.3 }} whileHover={{ scale: 0.4 }} transition={{ duration: 0.3, ease: "easeOut" }}
+                    className={'z-[20] -rotate-85 lg:rotate-180 -translate-y-5/11 -translate-x-5/8 lg:-translate-y-2/5 ' +
+                                  'lg:-translate-x-4/9 xl:-translate-x-2/9 object-contain'}/>
+            </div>
 
-            {/*<div className={"w-full h-full absolute flex overflow-hidden"}>*/}
-            {/*    <DynamicImage imageSource={"background/Flower1.png"}*/}
-            {/*                  imageStyle={'z-[20] rotate-90 translate-y-4/9 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}*/}
-            {/*                  scaleUp={'lg:scale-45 md:scale-35 scale-50'} originalScale={'lg:scale-40 md:scale-30 scale-40'}/>*/}
-            {/*    <DynamicImage imageSource={"background/Flower1.png"}*/}
-            {/*                  imageStyle={'z-[20] -rotate-85 lg:rotate-180 -translate-y-5/11 -translate-x-5/8 lg:-translate-y-2/5 ' +*/}
-            {/*                      'lg:-translate-x-4/9 xl:-translate-x-2/9 object-contain'}*/}
-            {/*                  scaleUp={'lg:scale-40 md:scale-45 scale-60'} originalScale={'lg:scale-30 md:scale-40 scale-50'}/>*/}
-            {/*</div>*/}
-
-            <motion.img src={'background/Flower1.png'} aria-hidden={true} alt={""} whileHover={{scale:1.2}} initial={{scale:1.0}}
-                className={'absolute'}/>
-
-            {/* logo logoborder background - visible on both mobile and laptop TODO resize*/}
-            {/*<LogoBorder/>*/}
+            {/* LOGO BORDER */}
+            <LogoBorder/>
 
             {/* content layer */}
             <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>

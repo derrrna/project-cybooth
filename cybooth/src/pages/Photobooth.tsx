@@ -7,84 +7,136 @@ import { motion } from "motion/react";
 
 /**
  * Photobooth Page Component
+ *
+ * TODO make mobile responsive
  */
 export default function Photobooth() {
+
+    const COUNTDOWN_LENGTH = 5;
+    const MAX_DISPLAYABLE_PHOTOS = 4;
+    const PHOTO_WIDTH = 1080;
+    const PHOTO_HEIGHT = 1920;
+
+    // COUNTDOWN RELATED
+    // Current value of the countdown as an integer. Initialised to 5.
+
+    const [currentCountdown, setCurrentCountdown] = useState(COUNTDOWN_LENGTH);
 
      // The current total number of photos.
     const [totalNumPhotos, setTotalNumPhotos] = useState(0)
 
-    /**
-     * TODO
-     */
+    // TODO
     const webcamRef = useRef(null);
 
-    /**
-     * Boolean set to True if countdown should be displayed.
-     */
+    // Tracks if countdown should be displayed
     const [showCountdown, setShowCountdown] = useState(false);
 
-    /**
-     * Current value of the countdown as an integer. Initialised to 5.
-     */
-    const [currentCountdown, setCurrentCountdown] = useState(5);
-
-    /**
-     * Array containing the 5 most recent photos taken.
-     * Formatted as ID and image source.
-     */
+     // Array containing the 4 most recent photos taken. Formatted as ID and image source.
     const [savedPhotos, setSavedPhotos] = useState([
         {id: uuidv4(), image: '/placeholder.jpg'},
         {id: uuidv4(), image: '/placeholder.jpg'},
         {id: uuidv4(), image: '/placeholder.jpg'},
         {id: uuidv4(), image: '/placeholder.jpg'}
     ])
-    
+
+    // Tracks whether photo preview should be displayed
     const [toggleViewPhotos, setToggleViewPhotos] = useState(false)
 
-    /**
-     * Called when the capture button is pressed.
-     */
-    const handleCaptureClick = () => {
+    // Function that is called when the capture button is pressed.
+    const handleCaptureButton = () => {
+        setCurrentCountdown(COUNTDOWN_LENGTH);
+        setShowCountdown(true)
+    }
 
-        // Set countdown to be active.
-        if (!showCountdown) {
-            setShowCountdown(true)
+    const takePhoto = () => {
 
-            setTimeout(()=> {
-                // Set the countdown to be inactive only once the countdown is finished.
-                setShowCountdown(false)
-                setCurrentCountdown(5);
+        // Grab photo from the webcam
+        const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
+        if (newPhoto) {
 
+            // Take the new photo and save it into a copy of the array with its correct index.
+            setSavedPhotos(prevState => {
                 // Calculate the index of the new photo and create a copy of the current saved photos.
-                const tempPhotos = [...savedPhotos]
                 const newPhotoIndex = totalNumPhotos % 4
-
-                // Take the new photo and save it into the array with its correct index.
-                const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
+                const tempPhotos = [...prevState]
                 tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
-                setSavedPhotos(tempPhotos)
+                return tempPhotos
+            })
 
-                // Update the total number of photos.
-                setTotalNumPhotos(prevTotalNumPhotos => prevTotalNumPhotos + 1)
-
-            }, 5000)
+            // Update the total number of photos.
+            setTotalNumPhotos(prevState => {return prevState + 1})
         }
     }
 
-    /**
-     * Changes the value of the countdown given the countdown is active and the current
-     * countdown value is more than 0.
-     */
+    // Tracks showCountdown.
     useEffect(() => {
 
-        // If countdown is active and the current countdown value is more than 0,
-        if (showCountdown && currentCountdown > 0) {
-            // Continue to decrement the countdown display value.
-            const intervalId = setInterval(() => setCurrentCountdown(prevSecond => prevSecond - 1), 1000)
-            return () => clearInterval(intervalId )
-        }
+        // If the countdown should be displayed.
+        if (showCountdown) {
 
-    }, [showCountdown, currentCountdown]);
+            setCurrentCountdown(COUNTDOWN_LENGTH);
+
+            // Run a function that is conducted every one second.
+            // Use functional setState here because its dependent on previous value
+            const intervalId = setInterval(() => {
+
+                setCurrentCountdown(prevSecond => {
+                    // Every second, the countdown value is decremented by one.
+                    const currentSecond = prevSecond - 1;
+
+                    // Once the counter reaches zero,
+                    if (currentSecond <= 0) {
+                        // Clear interval
+                        clearInterval(intervalId)
+                        // Hide the countdown (don't use functional since we don't care about the prev state)
+                        setShowCountdown(false)
+                        // Take the photo
+                        takePhoto()
+                        return 0
+                    }
+                    return currentSecond
+                })
+            }, 1000)
+            return () => clearInterval(intervalId)
+        }
+    }, [showCountdown]);
+
+    // useEffect(() => {
+    //
+    //     // If countdown is active and the current countdown value is more than 0,
+    //     if (showCountdown && currentCountdown > 0) {
+    //         // Continue to decrement the countdown display value.
+    //         const intervalId = setInterval(() => setCurrentCountdown(prevSecond => prevSecond - 1), 1000)
+    //         return () => clearInterval(intervalId )
+    //     }
+    //
+    // }, [showCountdown, currentCountdown]);
+
+    // const handleCaptureButton = () => {
+    //     // Set countdown to be active.
+    //     if (!showCountdown) {
+    //         setShowCountdown(true)
+    //
+    //         setTimeout(()=> {
+    //             // Set the countdown to be inactive only once the countdown is finished.
+    //             setShowCountdown(false)
+    //             setCurrentCountdown(5);
+    //
+    //             // Calculate the index of the new photo and create a copy of the current saved photos.
+    //             const tempPhotos = [...savedPhotos]
+    //             const newPhotoIndex = totalNumPhotos % 4
+    //
+    //             // Take the new photo and save it into the array with its correct index.
+    //             const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
+    //             tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
+    //             setSavedPhotos(tempPhotos)
+    //
+    //             // Update the total number of photos.
+    //             setTotalNumPhotos(prevTotalNumPhotos => prevTotalNumPhotos + 1)
+    //
+    //         }, 5000)
+    //     }
+    // }
 
     return (
 
@@ -92,7 +144,7 @@ export default function Photobooth() {
             className={'overflow-hidden w-screen h-screen relative'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 2.0, ease: "easeIn"}}
+            transition={{ duration: 1.0, ease: "easeIn"}}
         >
             {/* BACKGROUND SECTION */}
 
@@ -102,58 +154,59 @@ export default function Photobooth() {
 
             {/* Chromix Blobs - Visible for laptop only */}
             <img src={'background/chromix_40.png'} aria-hidden={true} alt={""}
-                 className={'absolute hidden opacity-50 lg:block lg:scale-[15%] lg:-bottom-[12%] lg:right-[10%]'} />
+                 className={'absolute hidden opacity-50 lg:block lg:scale-[15%] lg:-bottom-[12%] lg:right-[10%]'}/>
             <img src={'background/chromix_28.png'} aria-hidden={true} alt={""}
-                 className={'absolute hidden opacity-45 lg:block lg:scale-[20%] lg:left-[25%] lg:-top-[18%]'} />
+                 className={'absolute hidden opacity-45 lg:block lg:scale-[20%] lg:left-[25%] lg:-top-[18%]'}/>
             <img src={'background/chromix_34.png'} aria-hidden={true} alt={""}
-                 className={'hidden absolute opacity-40 lg:block lg:scale-[45%] lg:right-[30%] lg:-top-[35%]'} />
+                 className={'hidden absolute opacity-40 lg:block lg:scale-[45%] lg:right-[30%] lg:-top-[35%]'}/>
 
             {/* Flowers - Visible for all screen */}
-            <div className={"w-full h-full absolute flex overflow-hidden"}>
+            <div className={"w-full h-full absolute flex overflow-hidden z-[30]"}>
                 <motion.img
                     src={"background/Flower1.png"} aria-hidden={true} alt={""}
                     initial={{ scale: 0.4 }} whileHover={{ scale: 0.48 }} transition={{ duration: 0.3, ease: "easeOut" }}
-                    className={'z-[20] rotate-90 translate-y-4/9 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}
-                />
+                    className={'z-[30] rotate-90 translate-y-4/9 -translate-x-2/5 lg:-translate-x-1/6 object-contain'}/>
                 <motion.img
                     src={"background/Flower1.png"} aria-hidden={true} alt={""}
                     initial={{ scale: 0.3 }} whileHover={{ scale: 0.4 }} transition={{ duration: 0.3, ease: "easeOut" }}
-                    className={'z-[20] -rotate-85 lg:rotate-180 -translate-y-5/11 -translate-x-5/8 lg:-translate-y-2/5 ' +
+                    className={'z-[30] -rotate-85 lg:rotate-180 -translate-y-5/11 -translate-x-5/8 lg:-translate-y-2/5 ' +
                                   'lg:-translate-x-4/9 xl:-translate-x-2/9 object-contain'}/>
             </div>
 
             {/* LOGO BORDER */}
             <LogoBorder/>
 
-            {/* content layer */}
-            <div className={'w-full h-full absolute flex flex-col overflow-hidden justify-center items-center'}>
+            {/* CONTENT */}
+            <div className={'w-screen h-screen absolute flex flex-col justify-center items-center z-[31]'}>
 
-                {/* Topbar */}
-                <div className={'bg-[#FF4A8B] z-[28] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex ' +
-                    ' drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center '}>
+                {/* Topbar Section - Above Webcam */}
+                <div className={'bg-[#FF4A8B] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex ' +
+                    'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center'}>
 
                     <p className={'text-[#FFFFFF] text-xs lg:text-md font-neuropol-x m-0.5'}>cheese ★</p>
 
+                    {/* Toggle View PhotoPreview Button */}
+
+                    {/* For Laptop */}
                     <motion.button
                         className={`w-1/5 h-full cursor-pointer z-[20] rounded-3xl p-1 ml-3 flex ${toggleViewPhotos ? 'justify-end' : 'justify-start'}`}
                         onClick={() => setToggleViewPhotos(!toggleViewPhotos)}
                         animate={{backgroundColor: toggleViewPhotos ? '#ffffff' : '#E4447E',}}
                         transition={{backgroundColor: {duration: 0.2, ease: 'easeInOut'}}}>
-
                         <motion.div
-                            className={'w-2/5 h-full bg-white z-[38] rounded-3xl'}
-                            layout
+                            className={'w-2/5 h-full bg-white z-[38] rounded-3xl'} layout
                             animate={{ backgroundColor: toggleViewPhotos ? '#E4447E' : '#ffffff'}}
                             whileHover={{ backgroundColor: toggleViewPhotos ? '#E40087': '#ECECEC'}}
-                            transition={{type: "spring", visualDuration: 0.2, bounce: 0.2}}
-                        />
+                            transition={{type: "spring", visualDuration: 0.2, bounce: 0.2}}/>
                     </motion.button>
 
+                    {/* For Mobile TODO*/}
+                    <motion.button className={'hidden'}/>
                 </div>
 
                 {/* Webcam */}
                 <Webcam
-                    className={'z-[19] rounded-3xl object-cover h-3/5 w-3/4 lg:w-3/7 lg:h-5/7'}
+                    className={'z-[40] rounded-3xl object-cover h-3/5 w-3/4 lg:w-3/7 lg:h-5/7'}
                     audio={false}
                     screenshotFormat={"image/jpeg"}
                     screenshotQuality={1}
@@ -161,21 +214,18 @@ export default function Photobooth() {
                     ref={webcamRef}
                 />
 
-                {/* Capture button */}
+                {/* Capture Button */}
                 <motion.button
                     className={'bg-[#FF4A8B] w-1/5 h-1/15 md:w-1/6 lg:w-1/15 lg:h-1/15 z-[28] flex justify-center ' +
                         'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] rounded-br-3xl rounded-bl-3xl cursor-pointer'}
-
-                    whileHover={{backgroundColor: "#fa2d77"}}
-
-                    onClick = {handleCaptureClick}>
-                    <motion.img src={'icons/camera-icon.svg'} alt="camera icon" className={'w-1/4'}
+                    whileHover={{backgroundColor: "#fa2d77"}} onClick = {handleCaptureButton}>
+                    <motion.img src={'icons/camera-icon.svg'} alt={"camera icon"} className={'w-1/4'}
                                 whileHover={{scale:1.2}} whileTap={{scale: 1.05}}/>
                 </motion.button>
             </div>
 
-            {/* Photo Preview component - visible on laptop only */}
-            <motion.div className={`w-full h-full absolute flex overflow-hidden lg:pr-[6vw] lg:z-[18] justify-center lg:justify-end`}
+            {/* Photo Preview Component - visible on laptop only */}
+            <motion.div className={`w-full h-full relative flex overflow-hidden lg:pr-[6vw] lg:z-[30] justify-center lg:justify-end`}
                         animate = {{opacity: toggleViewPhotos ? 0 : 1}}
                         transition={{opacity: {duration: 0.2}}}>
                 <PhotoPreview imageList={savedPhotos} />

@@ -6,7 +6,7 @@
  */
 export default function LogoBorder(){
     return (
-        <div className={'flex relative w-screen h-screen'}>
+        <div className={'flex absolute w-screen h-screen z-[10]'}>
 
             {/* Chromix Blobs Near Logo - Visible for all screens */}
             <img className={'w-screen h-screen absolute z-[13] scale-[25%] -top-[50%] right-[45%]'}

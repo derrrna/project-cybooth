@@ -1,22 +1,16 @@
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import { motion } from "motion/react";
-
-/**
- * Props passed to PhotoPreview.
- */
-interface PhotoPreviewProps {
-    imageList: Array<{id: string, image: string}>;
-}
+import { usePhotos } from "../hooks/usePhotos.tsx";
 
 /**
  * PhotoPreview Component.
- * TODO fix so that dynamic image isn't used.
  * @param imageList An array of the 5 most recently taken photos.
  */
-export default function PhotoPreview({imageList}: PhotoPreviewProps) {
+export default function PhotoPreview() {
 
-    useEffect(() => {}, [imageList]);
+    const {photos} = usePhotos();
+    useEffect(() => {}, photos);
 
     return (
         <div className={'bg-[#CDB4DB] h-full w-full lg:h-4/5 lg:w-1/8 self-center p-2 lg:rounded-2xl flex flex-col items-center ' +
@@ -25,7 +19,7 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
             <h1 className={'text-[#FFFFFF] pt-4 font-Vipna tracking-widest text-xs'}>my photos</h1>
 
             {/* Takes the images given to it and displays it */}
-            {imageList.map((image) => (
+            {photos.map((image) => (
                 <div className={'w-full h-1/5 pt-2 pb-2 pr-3 pl-3'}>
                     <motion.img
                         key={image.id} src={image.image} alt={"captured image"}

@@ -1,4 +1,3 @@
-import DynamicImage from "./DynamicImage.tsx";
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import { motion } from "motion/react";
@@ -12,7 +11,7 @@ interface PhotoPreviewProps {
 
 /**
  * PhotoPreview Component.
- *
+ * TODO fix so that dynamic image isn't used.
  * @param imageList An array of the 5 most recently taken photos.
  */
 export default function PhotoPreview({imageList}: PhotoPreviewProps) {
@@ -20,19 +19,18 @@ export default function PhotoPreview({imageList}: PhotoPreviewProps) {
     useEffect(() => {}, [imageList]);
 
     return (
-        <div className={'bg-[#CDB4DB] z-[11] h-full w-full lg:h-4/5 lg:w-1/8 self-center p-2 lg:rounded-2xl flex flex-col items-center ' +
+        <div className={'bg-[#CDB4DB] h-full w-full lg:h-4/5 lg:w-1/8 self-center p-2 lg:rounded-2xl flex flex-col items-center ' +
             'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]'}>
 
             <h1 className={'text-[#FFFFFF] pt-4 font-Vipna tracking-widest text-xs'}>my photos</h1>
 
             {/* Takes the images given to it and displays it */}
             {imageList.map((image) => (
-                <div className={'w-full h-1/5'}>
-                    <DynamicImage imageSource={image.image}
-                                  key={image.id}
-                                  imageStyle={`object-cover rounded-xl transition-opacity duration-1000 ease-in-out `}
-                                  originalScale={'scale-80'}
-                                  scaleUp={'scale-90'}/>
+                <div className={'w-full h-1/5 pt-2 pb-2 pr-3 pl-3'}>
+                    <motion.img
+                        key={image.id} src={image.image} alt={"captured image"}
+                        className={'h-full w-full object-cover rounded-xl'}
+                        initial={'0.5'} whileHover={{scale: 0.9}}/>
                 </div>
             ))}
 

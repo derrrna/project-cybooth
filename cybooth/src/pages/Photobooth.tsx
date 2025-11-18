@@ -4,6 +4,7 @@ import PhotoPreview from "../components/PhotoPreview.tsx";
 import { v4 as uuidv4 } from 'uuid';
 import LogoBorder from "../components/LogoBorder.tsx";
 import { motion } from "motion/react";
+import { usePhotos } from "../hooks/usePhotos.tsx";
 
 /**
  * Photobooth Page Component
@@ -19,7 +20,6 @@ export default function Photobooth() {
 
     // COUNTDOWN RELATED
     // Current value of the countdown as an integer. Initialised to 5.
-
     const [currentCountdown, setCurrentCountdown] = useState(COUNTDOWN_LENGTH);
 
      // The current total number of photos.
@@ -51,13 +51,13 @@ export default function Photobooth() {
     const takePhoto = () => {
 
         // Grab photo from the webcam
-        const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
+        const newPhoto = webcamRef.current.getScreenshot(PHOTO_HEIGHT, PHOTO_WIDTH)
         if (newPhoto) {
 
             // Take the new photo and save it into a copy of the array with its correct index.
             setSavedPhotos(prevState => {
                 // Calculate the index of the new photo and create a copy of the current saved photos.
-                const newPhotoIndex = totalNumPhotos % 4
+                const newPhotoIndex = totalNumPhotos % MAX_DISPLAYABLE_PHOTOS
                 const tempPhotos = [...prevState]
                 tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
                 return tempPhotos

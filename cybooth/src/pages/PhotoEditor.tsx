@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import LogoBorder from "../components/LogoBorder.tsx";
 import SaveOptionButton from "../components/SaveOptionButton.tsx";
 import SwatchStyleButton from "../components/SwatchStyleButton.tsx";
+import PhotoPreview from "../components/PhotoPreview.tsx";
 
 export default function PhotoEditor() {
     return (
@@ -87,8 +88,9 @@ export default function PhotoEditor() {
 
             {/* Photo-strip Preview */}
             <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center z-[10]'}>
-                <img src={'sample_photostrip.png'} className={'rounded-2xl border-4 border-[#FFAFCC] ' +
-                    'shadow-[5px_6px_11.9px_3px_rgba(0,0,0,0.15)] z-20 h-5/6'}/>
+                {/*<img src={'sample_photostrip.png'} className={'rounded-2xl border-4 border-[#FFAFCC] ' +*/}
+                {/*    'shadow-[5px_6px_11.9px_3px_rgba(0,0,0,0.15)] z-20 h-5/6'}/>*/}
+                <PhotoPreview/>
             </div>
 
         </motion.div>

@@ -1,7 +1,6 @@
 import Webcam from 'react-webcam';
 import {useState, useRef, useEffect} from "react";
 import PhotoPreview from "../components/PhotoPreview.tsx";
-import { v4 as uuidv4 } from 'uuid';
 import LogoBorder from "../components/LogoBorder.tsx";
 import { motion } from "motion/react";
 import { usePhotos } from "../hooks/usePhotos.tsx";
@@ -14,30 +13,13 @@ import { usePhotos } from "../hooks/usePhotos.tsx";
 export default function Photobooth() {
 
     const COUNTDOWN_LENGTH = 5;
-    const MAX_DISPLAYABLE_PHOTOS = 4;
     const PHOTO_WIDTH = 1080;
     const PHOTO_HEIGHT = 1920;
 
-    // COUNTDOWN RELATED
-    // Current value of the countdown as an integer. Initialised to 5.
     const [currentCountdown, setCurrentCountdown] = useState(COUNTDOWN_LENGTH);
-
-     // The current total number of photos.
-    const [totalNumPhotos, setTotalNumPhotos] = useState(0)
-
-    // TODO
-    const webcamRef = useRef(null);
-
-    // Tracks if countdown should be displayed
     const [showCountdown, setShowCountdown] = useState(false);
-
-     // Array containing the 4 most recent photos taken. Formatted as ID and image source.
-    const [savedPhotos, setSavedPhotos] = useState([
-        {id: uuidv4(), image: '/placeholder.jpg'},
-        {id: uuidv4(), image: '/placeholder.jpg'},
-        {id: uuidv4(), image: '/placeholder.jpg'},
-        {id: uuidv4(), image: '/placeholder.jpg'}
-    ])
+    const webcamRef = useRef(null);
+    const {addPhoto} = usePhotos()
 
     // Tracks whether photo preview should be displayed
     const [toggleViewPhotos, setToggleViewPhotos] = useState(false)
@@ -49,22 +31,10 @@ export default function Photobooth() {
     }
 
     const takePhoto = () => {
-
         // Grab photo from the webcam
         const newPhoto = webcamRef.current.getScreenshot(PHOTO_HEIGHT, PHOTO_WIDTH)
         if (newPhoto) {
-
-            // Take the new photo and save it into a copy of the array with its correct index.
-            setSavedPhotos(prevState => {
-                // Calculate the index of the new photo and create a copy of the current saved photos.
-                const newPhotoIndex = totalNumPhotos % MAX_DISPLAYABLE_PHOTOS
-                const tempPhotos = [...prevState]
-                tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
-                return tempPhotos
-            })
-
-            // Update the total number of photos.
-            setTotalNumPhotos(prevState => {return prevState + 1})
+            addPhoto(newPhoto);
         }
     }
 
@@ -100,43 +70,6 @@ export default function Photobooth() {
             return () => clearInterval(intervalId)
         }
     }, [showCountdown]);
-
-    // useEffect(() => {
-    //
-    //     // If countdown is active and the current countdown value is more than 0,
-    //     if (showCountdown && currentCountdown > 0) {
-    //         // Continue to decrement the countdown display value.
-    //         const intervalId = setInterval(() => setCurrentCountdown(prevSecond => prevSecond - 1), 1000)
-    //         return () => clearInterval(intervalId )
-    //     }
-    //
-    // }, [showCountdown, currentCountdown]);
-
-    // const handleCaptureButton = () => {
-    //     // Set countdown to be active.
-    //     if (!showCountdown) {
-    //         setShowCountdown(true)
-    //
-    //         setTimeout(()=> {
-    //             // Set the countdown to be inactive only once the countdown is finished.
-    //             setShowCountdown(false)
-    //             setCurrentCountdown(5);
-    //
-    //             // Calculate the index of the new photo and create a copy of the current saved photos.
-    //             const tempPhotos = [...savedPhotos]
-    //             const newPhotoIndex = totalNumPhotos % 4
-    //
-    //             // Take the new photo and save it into the array with its correct index.
-    //             const newPhoto = webcamRef.current.getScreenshot(1920, 1080)
-    //             tempPhotos[newPhotoIndex] = {id: uuidv4(), image: newPhoto}
-    //             setSavedPhotos(tempPhotos)
-    //
-    //             // Update the total number of photos.
-    //             setTotalNumPhotos(prevTotalNumPhotos => prevTotalNumPhotos + 1)
-    //
-    //         }, 5000)
-    //     }
-    // }
 
     return (
 
@@ -225,10 +158,10 @@ export default function Photobooth() {
             </div>
 
             {/* Photo Preview Component - visible on laptop only */}
-            <motion.div className={`w-full h-full relative flex overflow-hidden lg:pr-[6vw] lg:z-[30] justify-center lg:justify-end`}
+            <motion.div className={`w-full h-full relative flex overflow-hidden lg:pr-[6vw] lg:z-[50] justify-center lg:justify-end`}
                         animate = {{opacity: toggleViewPhotos ? 0 : 1}}
                         transition={{opacity: {duration: 0.2}}}>
-                <PhotoPreview imageList={savedPhotos} />
+                <PhotoPreview/>
             </motion.div>
 
             {/* Countdown - active when capture button is pressed. */}

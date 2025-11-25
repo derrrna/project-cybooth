@@ -31,12 +31,16 @@ export default function Photobooth() {
     }
 
     const takePhoto = () => {
+        console.log('takePhoto called');
+
         // Grab photo from the webcam
         const newPhoto = webcamRef.current.getScreenshot(PHOTO_HEIGHT, PHOTO_WIDTH)
         if (newPhoto) {
             addPhoto(newPhoto);
         }
     }
+
+    //TODO: causing double photo taken. need to fix.
 
     // Tracks showCountdown.
     useEffect(() => {
@@ -166,7 +170,7 @@ export default function Photobooth() {
 
             {/* Countdown - active when capture button is pressed. */}
             <div className={`w-full h-full absolute flex justify-center items-center ${showCountdown ? '' : 'hidden'}`}>
-                <p className={'text-white text-6xl z-30 animate-[ping_1.1s_ease-in-out_5] font-press2p'}>{currentCountdown}</p>
+                <p className={'text-white text-6xl z-30 animate-[ping_1.1s_ease-in-out_5] font-press2p z-[40]'}>{currentCountdown}</p>
             </div>
 
         </motion.div>

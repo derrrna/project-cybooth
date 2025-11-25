@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useContext, useState} from "react";
+import {createContext, ReactNode, useState} from "react";
 import {v4 as uuidv4} from "uuid";
 
 export interface Photo {
@@ -28,6 +28,7 @@ export function PhotoProvider({children}: {children: ReactNode} ) {
 
     // Function that adds a new photo into the array.
     const addPhoto = (image: string) => {
+        console.log('addPhoto called');
 
         setTotalNumPhotos(prevState => {
 

@@ -25,7 +25,6 @@ export default function PhotoEditor() {
                     link.href = URL.createObjectURL(blob);
                     link.download = "photostrip.png";
                     link.click()
-                    // URL.revokeObjectURL(link);
                 }
             }, "image/jpeg");
         }
@@ -83,18 +82,18 @@ export default function PhotoEditor() {
 
                         {/* Themed */}
                         <div className={'w-full flex justify-between z-[25]'}>
-                            <SwatchStyleButton/>
-                            <SwatchStyleButton/>
-                            <SwatchStyleButton/>
-                            <SwatchStyleButton/>
+                            <SwatchStyleButton color={"fcd2af"}/>
+                            <SwatchStyleButton color={"FFFFFF"}/>
+                            <SwatchStyleButton color={"ffc2d1"}/>
+                            <SwatchStyleButton color={"d7c8f3"}/>
                         </div>
 
                         {/* Simple*/}
                         <div className={'w-full flex m-4 justify-between'}>
-                            <SwatchStyleButton/>
-                            <SwatchStyleButton/>
-                            <SwatchStyleButton/>
-                            <SwatchStyleButton/>
+                            <SwatchStyleButton color={""}/>
+                            <SwatchStyleButton color={""}/>
+                            <SwatchStyleButton color={""}/>
+                            <SwatchStyleButton color={""}/>
                         </div>
 
                     </div>
@@ -114,18 +113,27 @@ export default function PhotoEditor() {
 
             {/* Photo-strip Preview */}
             <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center z-[10]'}>
-                <div className={'bg-black h-full w-full lg:h-4/5 lg:w-1/8 lg:rounded-2xl lg:rounded-2xl flex flex-col items-center ' +
-                    'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center'} ref={photoRef}>
+                <div className={'bg-[url(photostripThemes/black-theme.jpg)] bg-cover ' +
+                    'overflow-hidden h-full w-full lg:h-4/5 lg:w-1/8 lg:rounded-2xl flex flex-col ' +
+                    'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center items-center'}
+                     ref={photoRef}>
 
                     {photos.map((image) => (
-                        <div key={image.id} className={'w-full h-1/5 pt-2 pb-2 pr-3 pl-3'}>
+                        <div key={image.id} className={'w-8/9 h-1/5 pt-2 pb-2 pr-3 pl-3'}>
                             <motion.img
                                 src={image.image} alt={"captured image"}
                                 className={'h-full w-full object-cover rounded-xl'}
                                 initial={'0.5'} whileHover={{scale: 0.9}}/>
                         </div>
                     ))}
+
+                    <p className={'pt-5 font-w95fa text-2xl'}>
+                        cybooth!
+                    </p>
+
                 </div>
+
+
             </div>
 
         </motion.div>

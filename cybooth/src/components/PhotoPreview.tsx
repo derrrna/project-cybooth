@@ -10,7 +10,6 @@ import { usePhotos } from "../hooks/usePhotos.tsx";
 export default function PhotoPreview() {
 
     const {photos} = usePhotos();
-    useEffect(() => {}, photos);
 
     return (
         <div className={'bg-[#CDB4DB] h-full w-full lg:h-4/5 lg:w-1/8 self-center p-2 lg:rounded-2xl flex flex-col items-center ' +
@@ -20,9 +19,9 @@ export default function PhotoPreview() {
 
             {/* Takes the images given to it and displays it */}
             {photos.map((image) => (
-                <div className={'w-full h-1/5 pt-2 pb-2 pr-3 pl-3'}>
+                <div key={image.id} className={'w-full h-1/5 pt-2 pb-2 pr-3 pl-3'}>
                     <motion.img
-                        key={image.id} src={image.image} alt={"captured image"}
+                        src={image.image} alt={"captured image"}
                         className={'h-full w-full object-cover rounded-xl'}
                         initial={'0.5'} whileHover={{scale: 0.9}}/>
                 </div>

@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/press-start-2p": "^5.2.5",
     "@tailwindcss/vite": "^4.0.14",
+    "html2canvas": "^1.4.1",
     "motion": "^12.15.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

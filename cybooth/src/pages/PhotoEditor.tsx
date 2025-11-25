@@ -2,9 +2,35 @@ import { motion } from "motion/react";
 import LogoBorder from "../components/LogoBorder.tsx";
 import SaveOptionButton from "../components/SaveOptionButton.tsx";
 import SwatchStyleButton from "../components/SwatchStyleButton.tsx";
-import PhotoPreview from "../components/PhotoPreview.tsx";
+import {usePhotos} from "../hooks/usePhotos.tsx";
+import {useRef} from "react";
+import html2canvas from "html2canvas";
 
 export default function PhotoEditor() {
+
+    const {photos} = usePhotos();
+    const photoRef = useRef(null);
+
+    const handleSaveButton = async () => {
+
+        if (photoRef.current) {
+            // Create the canvas, convert to a blob
+            const canvas = await html2canvas(photoRef.current)
+            canvas.toBlob((blob) => {
+
+                // If blob is not empty.
+                if (blob) {
+                    // Save as link.
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "photostrip.png";
+                    link.click()
+                    // URL.revokeObjectURL(link);
+                }
+            }, "image/jpeg");
+        }
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -34,9 +60,9 @@ export default function PhotoEditor() {
                     <div className={'bg-[#FFF2F7] w-1/3 h-1/5 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-3xl p-6 flex flex-col'}>
                         <h2 className={'w-full text-center text-[#FF4A8B] font-press2p'}>save</h2>
                         <div className={'flex w-full mt-5 gap-5 justify-center'}>
-                            <SaveOptionButton iconSrc={'icons/pdf-icon.svg'}/>
-                            <SaveOptionButton iconSrc={'icons/image-icon.svg'}/>
-                            <SaveOptionButton iconSrc={'icons/print-icon.svg' }/>
+                            <SaveOptionButton iconSrc={'icons/pdf-icon.svg'} handler={handleSaveButton}/>
+                            <SaveOptionButton iconSrc={'icons/image-icon.svg'} handler={handleSaveButton}/>
+                            <SaveOptionButton iconSrc={'icons/print-icon.svg' } handler={handleSaveButton}/>
                         </div>
 
                     </div>
@@ -88,9 +114,18 @@ export default function PhotoEditor() {
 
             {/* Photo-strip Preview */}
             <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center z-[10]'}>
-                {/*<img src={'sample_photostrip.png'} className={'rounded-2xl border-4 border-[#FFAFCC] ' +*/}
-                {/*    'shadow-[5px_6px_11.9px_3px_rgba(0,0,0,0.15)] z-20 h-5/6'}/>*/}
-                <PhotoPreview/>
+                <div className={'bg-black h-full w-full lg:h-4/5 lg:w-1/8 lg:rounded-2xl lg:rounded-2xl flex flex-col items-center ' +
+                    'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center'} ref={photoRef}>
+
+                    {photos.map((image) => (
+                        <div key={image.id} className={'w-full h-1/5 pt-2 pb-2 pr-3 pl-3'}>
+                            <motion.img
+                                src={image.image} alt={"captured image"}
+                                className={'h-full w-full object-cover rounded-xl'}
+                                initial={'0.5'} whileHover={{scale: 0.9}}/>
+                        </div>
+                    ))}
+                </div>
             </div>
 
         </motion.div>

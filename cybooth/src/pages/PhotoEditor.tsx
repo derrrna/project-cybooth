@@ -94,9 +94,9 @@ export default function PhotoEditor() {
                         {/* Simple*/}
                         <div className={'w-full flex m-4 justify-between'}>
                             <SwatchStyleButton color={"url(photostripThemes/black-theme.jpg)"}/>
-                            <SwatchStyleButton color={"url(photostripThemes/pink-theme.jpg)"}/>
-                            <SwatchStyleButton color={""}/>
-                            <SwatchStyleButton color={""}/>
+                            <SwatchStyleButton color={"url(photostripThemes/pink-theme.png)"}/>
+                            <SwatchStyleButton color={"url(photostripThemes/green-theme.png)"}/>
+                            <SwatchStyleButton color={"url(photostripThemes/purple-theme.png)"}/>
                         </div>
 
                     </div>

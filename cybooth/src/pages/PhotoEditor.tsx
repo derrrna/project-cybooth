@@ -5,11 +5,14 @@ import SwatchStyleButton from "../components/SwatchStyleButton.tsx";
 import {usePhotos} from "../hooks/usePhotos.tsx";
 import {useRef} from "react";
 import html2canvas from "html2canvas";
+import {usePhotoBackground} from "../hooks/usePhotoBackground.tsx";
 
 export default function PhotoEditor() {
 
     const {photos} = usePhotos();
     const photoRef = useRef(null);
+
+    const {photoBackground} = usePhotoBackground()
 
     const handleSaveButton = async () => {
 
@@ -113,7 +116,7 @@ export default function PhotoEditor() {
 
             {/* Photo-strip Preview */}
             <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center z-[10]'}>
-                <div className={'bg-[url(photostripThemes/black-theme.jpg)] bg-cover ' +
+                <div className={`bg-cover ${photoBackground} ` +
                     'overflow-hidden h-full w-full lg:h-4/5 lg:w-1/8 lg:rounded-2xl flex flex-col ' +
                     'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center items-center'}
                      ref={photoRef}>

@@ -17,7 +17,7 @@ export const PhotoContext = createContext<PhotoContextValue | null>(null);
 export function PhotoProvider({children}: {children: ReactNode} ) {
 
     const MAX_DISPLAYABLE_PHOTOS = 4;
-    const [totalNumPhotos, setTotalNumPhotos] = useState(0)
+    const [, setTotalNumPhotos] = useState(0)
 
     const [photos, setPhotos] = useState([
         {id: uuidv4(), image: '/placeholder.jpg'},

@@ -82,10 +82,10 @@ export default function PhotoEditor() {
 
                         {/* Themed */}
                         <div className={'w-full flex justify-between z-[25]'}>
-                            <SwatchStyleButton color={"fcd2af"}/>
-                            <SwatchStyleButton color={"FFFFFF"}/>
-                            <SwatchStyleButton color={"ffc2d1"}/>
-                            <SwatchStyleButton color={"d7c8f3"}/>
+                            <SwatchStyleButton color={"#fcd2af"}/>
+                            <SwatchStyleButton color={"#f5f3f4"}/>
+                            <SwatchStyleButton color={"#ffc2d1"}/>
+                            <SwatchStyleButton color={"#d7c8f3"}/>
                         </div>
 
                         {/* Simple*/}

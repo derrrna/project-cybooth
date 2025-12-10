@@ -86,15 +86,15 @@ export default function PhotoEditor() {
                         {/* Themed */}
                         <div className={'w-full flex justify-between z-[25]'}>
                             <SwatchStyleButton color={"#fcd2af"}/>
-                            <SwatchStyleButton color={"#f5f3f4"}/>
+                            <SwatchStyleButton color={"#FFFFFF"}/>
                             <SwatchStyleButton color={"#ffc2d1"}/>
                             <SwatchStyleButton color={"#d7c8f3"}/>
                         </div>
 
                         {/* Simple*/}
                         <div className={'w-full flex m-4 justify-between'}>
-                            <SwatchStyleButton color={""}/>
-                            <SwatchStyleButton color={""}/>
+                            <SwatchStyleButton color={"url(photostripThemes/black-theme.jpg)"}/>
+                            <SwatchStyleButton color={"url(photostripThemes/pink-theme.jpg)"}/>
                             <SwatchStyleButton color={""}/>
                             <SwatchStyleButton color={""}/>
                         </div>
@@ -116,10 +116,11 @@ export default function PhotoEditor() {
 
             {/* Photo-strip Preview */}
             <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center z-[10]'}>
-                <div className={`bg-cover ${photoBackground} ` +
-                    'overflow-hidden h-full w-full lg:h-4/5 lg:w-1/8 lg:rounded-2xl flex flex-col ' +
+                <motion.div className={'overflow-hidden h-full w-full lg:h-4/5 lg:w-1/8 lg:rounded-2xl flex flex-col ' +
                     'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center items-center'}
-                     ref={photoRef}>
+                    animate={{ background: `${photoBackground}`, backgroundSize: 'cover' }}
+                    transition={{ duration: 0.5, ease: "easeIn"}}
+                    ref={photoRef}>
 
                     {photos.map((image) => (
                         <div key={image.id} className={'w-8/9 h-1/5 pt-2 pb-2 pr-3 pl-3'}>
@@ -134,7 +135,7 @@ export default function PhotoEditor() {
                         cybooth!
                     </p>
 
-                </div>
+                </motion.div>
 
 
             </div>

@@ -9,8 +9,9 @@ export const PhotoBgContext = createContext<PhotoBgContextValue| null> (null);
 
 export function PhotoBgProvider({children}: {children: ReactNode}) {
 
-    const [photoBackground, setPhotoBackground] = useState("bg-[url(photostripThemes/black-theme.jpg)]");
+    const [photoBackground, setPhotoBackground] = useState("url(photostripThemes/black-theme.jpg)");
 
+    //TODO
     const changeBackground = (newBg: string) => {
         setPhotoBackground(newBg)
     }

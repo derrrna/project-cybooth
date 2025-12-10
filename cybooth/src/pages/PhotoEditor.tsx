@@ -115,9 +115,9 @@ export default function PhotoEditor() {
             </div>
 
             {/* Photo-strip Preview */}
-            <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center z-[10]'}>
+            <div className={'w-full h-full absolute flex overflow-hidden flex justify-center items-center'}>
                 <motion.div className={'overflow-hidden h-full w-full lg:h-4/5 lg:w-1/8 lg:rounded-2xl flex flex-col ' +
-                    'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center items-center'}
+                    'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center items-center z-10'}
                     animate={{ background: `${photoBackground}`, backgroundSize: 'cover' }}
                     transition={{ duration: 0.5, ease: "easeIn"}}
                     ref={photoRef}>
@@ -131,9 +131,9 @@ export default function PhotoEditor() {
                         </div>
                     ))}
 
-                    <p className={'pt-5 font-w95fa text-2xl'}>
-                        cybooth!
-                    </p>
+                    {/*<p className={'pt-5 font-w95fa text-2xl'}>*/}
+                    {/*    cybooth!*/}
+                    {/*</p>*/}
 
                 </motion.div>
 

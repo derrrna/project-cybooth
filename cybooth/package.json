@@ -37,7 +37,7 @@
     "vite": "^6.2.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }

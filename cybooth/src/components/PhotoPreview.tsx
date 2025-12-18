@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom";
-import {useEffect} from "react";
 import { motion } from "motion/react";
 import { usePhotos } from "../hooks/usePhotos.tsx";
 

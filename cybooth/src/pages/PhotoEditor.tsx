@@ -130,14 +130,11 @@ export default function PhotoEditor() {
                             <div key={image.id} className={'w-4/5 h-1/5 p-2'}>
                                 <motion.img
                                     src={image.image} alt={"captured image"}
-                                    className={'h-full w-full rounded-xl'}
+                                    className={'rounded-xl'}
                                     initial={'0.5'} whileHover={{scale: 0.9}}/>
                             </div>
                         ))}
 
-                        {/*<p className={'pt-5 font-w95fa text-2xl'}>*/}
-                        {/*    cybooth!*/}
-                        {/*</p>*/}
                     </motion.div>
                 </div>
             </div>

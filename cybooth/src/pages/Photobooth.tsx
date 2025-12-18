@@ -127,28 +127,29 @@ export default function Photobooth() {
                 <div className={'w-screen h-screen absolute flex flex-col justify-center items-center'}>
 
                     {/* Topbar Section - Above Webcam */}
-                    <div className={'bg-[#FF4A8B] w-3/5 lg:w-1/6 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex ' +
+                    <div className={'bg-[#FF4A8B] lg:w-1/5 p-2 lg:mt-[4vh] rounded-tr-4xl rounded-tl-4xl flex ' +
                         'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] justify-center z-[30]'}>
 
                         <p className={'text-[#FFFFFF] text-xs lg:text-md font-neuropol-x m-0.5'}>cheese ★</p>
 
                         {/* Toggle View PhotoPreview Button */}
-
-                        {/* For Laptop */}
                         <motion.button
                             className={`w-1/5 h-full cursor-pointer z-[38] rounded-3xl p-1 ml-3 flex ${toggleViewPhotos ? 'justify-end' : 'justify-start'}`}
                             onClick={() => setToggleViewPhotos(!toggleViewPhotos)}
                             animate={{backgroundColor: toggleViewPhotos ? '#ffffff' : '#E4447E',}}
                             transition={{backgroundColor: {duration: 0.2, ease: 'easeInOut'}}}>
                             <motion.div
-                                className={'w-2/5 h-full bg-white z-[38] rounded-3xl'} layout
+                                className={'w-2/5 h-full bg-white z-[38] rounded-3xl p-1'} layout
                                 animate={{ backgroundColor: toggleViewPhotos ? '#E4447E' : '#ffffff'}}
                                 whileHover={{ backgroundColor: toggleViewPhotos ? '#E40087': '#ECECEC'}}
-                                transition={{type: "spring", visualDuration: 0.2, bounce: 0.2}}/>
+                                transition={{type: "spring", visualDuration: 0.2, bounce: 0.2}}>
+
+                                {/*TODO */}
+                                <img src={'icons/eye-icon.svg'}/>
+
+                            </motion.div>
                         </motion.button>
 
-                        {/* For Mobile TODO*/}
-                        <motion.button className={'hidden'}/>
                     </div>
 
                     {/* Webcam */}

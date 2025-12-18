@@ -21,9 +21,11 @@ export default function PhotoPreview() {
             {photos.map((image) => (
                 <div key={image.id} className={'w-full h-1/5 pt-2 pb-2 pr-3 pl-3'}>
                     <motion.img
+                        animate={{opacity: 1, transition: {duration:0.8, ease: "easeIn" }}}
                         src={image.image} alt={"captured image"}
                         className={'h-full w-full object-cover rounded-xl'}
-                        initial={'0.5'} whileHover={{scale: 0.9}}/>
+                        initial={{opacity:0.1}}
+                        whileHover={{scale: 0.9}}/>
                 </div>
             ))}
 

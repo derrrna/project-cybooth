@@ -1,16 +1,18 @@
 import { motion } from "motion/react";
 import {Link} from "react-router-dom";
+import MobilePage from "../components/MobilePage.tsx";
 
-// Transforms normal Link component into a Motion animate-able component.
-const MotionLink = motion(Link)
+
 
 /**
  * Landing Page Component
  *
- * TODO: make mobile responsive.
  * @constructor
  */
 export default function Landing() {
+
+    // Transforms normal Link component into a Motion animate-able component.
+    const MotionLink = motion(Link)
 
     return (
         <motion.div
@@ -19,8 +21,11 @@ export default function Landing() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.0, ease: "easeIn" }}
         >
+
+            <MobilePage/>
+
             {/* BACKGROUND SECTION */}
-            <div className={'absolute w-full h-full flex'}>
+            <div className={'absolute w-full h-full hidden lg:flex'}>
 
                 {/* Chromix Blobs - Visible for all screens */}
                 <div className={'hidden lg:block w-3/4 h-full relative'}>
@@ -49,7 +54,7 @@ export default function Landing() {
             </div>
 
             {/* CONTENT SECTION */}
-            <div className={'absolute w-full h-full flex flex-col lg:flex-row'}>
+            <div className={'absolute w-full h-full hidden lg:flex lg:flex-row'}>
 
                 <div className={'w-full lg:w-3/5 flex flex-col z-20 items-center justify-center cursor-default'}>
 

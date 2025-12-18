@@ -28,7 +28,6 @@ export function PhotoProvider({children}: {children: ReactNode} ) {
 
     // Function that adds a new photo into the array.
     const addPhoto = (image: string) => {
-        console.log('addPhoto called');
 
         setTotalNumPhotos(prevState => {
 

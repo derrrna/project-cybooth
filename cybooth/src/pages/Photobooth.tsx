@@ -48,8 +48,6 @@ export default function Photobooth() {
         // If the countdown should be displayed.
         if (showCountdown) {
 
-            setCurrentCountdown(COUNTDOWN_LENGTH);
-
             // Run a function that is conducted every one second.
             // Use functional setState here because its dependent on previous value
             const intervalId = setInterval(() => {

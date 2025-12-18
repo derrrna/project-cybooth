@@ -123,10 +123,10 @@ export default function PhotoEditor() {
                     ref={photoRef}>
 
                     {photos.map((image) => (
-                        <div key={image.id} className={'w-8/9 h-1/5 pt-2 pb-2 pr-3 pl-3'}>
+                        <div key={image.id} className={'w-4/5 h-1/5 p-2'}>
                             <motion.img
                                 src={image.image} alt={"captured image"}
-                                className={'h-full w-full object-cover rounded-xl'}
+                                className={'h-full w-full rounded-xl'}
                                 initial={'0.5'} whileHover={{scale: 0.9}}/>
                         </div>
                     ))}
